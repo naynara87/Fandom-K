@@ -27,7 +27,7 @@ Fandom-k/
 │   │   ├── fonts/
 │   │   ├── images/
 │   │   └── css/
-│   │       └── index.css
+│   │       └── global.css
 │   ├── components/
 │   │   ├── Header
 │   │   ├── Modal
