@@ -1,0 +1,29 @@
+/* ==== variables ==== */
+
+:root {
+  --main-font: 'Pretendard';
+
+  /* Brand Colors */
+  --brand-orange: #f96d69;
+  --brand-pink: #fe5493;
+  --brand-gradation: linear-gradient(45deg, #f96d69, #fe5493);
+
+  /* Gray System */
+  --gray-900: #02000e;
+  --gray-800: #181d26;
+  --gray-500: #67666e;
+  --gray-400: #828282;
+  --gray-300: #8c92ab;
+  --gray-200: #a3a5a8;
+  --gray-100: #f7f7f8;
+  --white: #fff;
+
+  /* 폰트를 부드럽게 렌더링하기 위한 속성  */
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* 아이폰 가로 모드에서 글씨 확대 금지 */
+  -webkit-text-size-adjust: 100%;
+}
