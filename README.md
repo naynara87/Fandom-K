@@ -26,7 +26,7 @@ Fandom-k/
 │   ├── assets/
 │   │   ├── fonts/
 │   │   ├── images/
-│   │   └── css/
+│   │   └── styles/
 │   │       └── global.css
 │   ├── components/
 │   │   ├── Header
