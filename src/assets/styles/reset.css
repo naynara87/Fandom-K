@@ -38,3 +38,6 @@ button {
 .bg-brand-gradation {
   background: var(--brand-gradation);
 }
+.text-point-yellow {
+  color: var(--point-yellow);
+}
