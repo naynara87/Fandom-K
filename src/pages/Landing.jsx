@@ -27,7 +27,7 @@ function Landing() {
             <Link
               to="/list"
               className="block mx-auto text-center
-                max-w-sm w-full py-2 bg-brand-gradation text-sm font-bold rounded-md transition duration-300 ease-in-out"
+                max-w-sm w-full py-3 bg-brand-gradation text-base font-bold rounded-md transition duration-300 ease-in-out"
             >
               지금 시작하기
             </Link>
