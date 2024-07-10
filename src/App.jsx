@@ -5,7 +5,7 @@ import List from './pages/List';
 import Mypage from './pages/Mypage';
 
 function App() {
-  return ( 
+  return (
     <Router>
       <Routes>
         <Route path="/" element={<Landing />} />
