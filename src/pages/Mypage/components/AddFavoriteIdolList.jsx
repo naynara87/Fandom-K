@@ -9,19 +9,26 @@ import useIdolData from '../hooks/useIdolData';
 function AddFavoriteIdolList() {
   const idolData = useIdolData();
 
-  const [isSelected, setIsSelected] = useState(false);
+  const [isSelected, setIsSelected] = useState(new Array(idolData.length).fill(false));
 
-  const handleSelectIdolButtonClick = () => {
-    setIsSelected(!isSelected);
+  const handleSelectIdolButtonClick = (index) => {
+    const updatedSelection = [...isSelected];
+    updatedSelection[index] = !updatedSelection[index];
+    setIsSelected(updatedSelection);
   };
 
   return (
     <>
       <div className="add-favorite-idol-list">
-        {idolData.map((idol) => {
+        {idolData.map((idol, index) => {
           return (
-            <button key={idol.id} type="button" aria-label="Add Favorite Idol" onClick={handleSelectIdolButtonClick}>
-              <AddIdolListItem isSelected={isSelected} idolData={idol} />
+            <button
+              key={idol.id}
+              type="button"
+              aria-label="Add Favorite Idol"
+              onClick={() => handleSelectIdolButtonClick(index)}
+            >
+              <AddIdolListItem isSelected={isSelected[index]} idolData={idol} />
             </button>
           );
         })}
