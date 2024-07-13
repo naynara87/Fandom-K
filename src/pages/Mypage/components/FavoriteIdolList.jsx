@@ -6,7 +6,7 @@ import AddFavoriteIdolList from './AddFavoriteIdolList';
 function FavoriteIdolList() {
   return (
     <div>
-      <section>
+      <section className="section-my-favorite-idol">
         <h1 className="list-title">내가 관심 있는 아이돌</h1>
         <MyFavoriteIdolList />
       </section>

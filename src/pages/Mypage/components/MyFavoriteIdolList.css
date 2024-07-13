@@ -1,6 +1,7 @@
 .my-favorite-idol-list {
   width: 100%;
-  margin-bottom: 83px;
+  padding-bottom: 40px;
+  border-bottom: solid 1px #ffffff26;
   white-space: nowrap;
   overflow-x: auto;
   /* 스크롤 바 숨기기 */
