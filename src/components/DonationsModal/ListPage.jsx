@@ -20,7 +20,7 @@ const ListPage = () => {
 
   return (
     <div className="ListPage">
-      <DonationsList idols={idols} donations={openDonationsModal} />
+      <DonationsList idols={idols} donations={donations} />
       {showDonationsModal && <DonationsModal idol={selectedIdol} closeModal={closeModal} />}
     </div>
   );
