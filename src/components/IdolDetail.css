@@ -1,0 +1,34 @@
+.idol-container {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.idol-container:last-child {
+  border-bottom: none;
+}
+
+.idol-image img {
+  width: 70px;
+  height: 70px;
+  border-radius: 40px;
+  padding: 5px;
+  border: 1px solid #F86F65;
+}
+
+.idol-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.idol-rate {
+  color: #F86F65;
+}
+
+.idol-vote-rate {
+  color: rgba(255, 255, 255, 0.6);
+}
