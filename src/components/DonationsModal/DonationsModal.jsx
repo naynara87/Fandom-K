@@ -3,9 +3,8 @@ import donationCredit from '../../assets/images/donationCredit.png';
 import DeleteButton from './DeleteButton';
 import Button from './Button';
 import './DonationsModal.css';
-import '../../assets/styles/global.css';
 
-function DonationsModal({ profilePicture, closeModal }) {
+function DonationsModal({ profilePicture, subtitle, title, closeModal }) {
   const [credit, setCredit] = useState();
   const [buttonType, setbuttonType] = useState('inactive');
   const [isDonationValid, setIsDonationValid] = useState(false);
@@ -37,9 +36,9 @@ function DonationsModal({ profilePicture, closeModal }) {
         <h2>후원하기</h2>
         <DeleteButton onClick={closeModal} />
       </div>
-      <img className="profile-picture" src={profilePicture} alt="아이돌 이미지" />
-      <div className="subtitle">subtitle</div>
-      <div className="title">title</div>
+      <img class="profile-picture" src={profilePicture} alt="아이돌 이미지" />
+      <div className="subtitle">{subtitle}</div>
+      <div className="title">{title}</div>
       <div className="input-wrapper">
         <input name="credit" type="number" value={credit} placeholder="크레딧 입력" onChange={handleInputChange} />
         <img src={donationCredit} alt="크레딧 이미지" />
