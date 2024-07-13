@@ -2,7 +2,7 @@ import React from 'react';
 import './Landing.css';
 
 function Landing() {
-  return <div>Landing</div>;
+  return <></>;
 }
 
 export default Landing;
