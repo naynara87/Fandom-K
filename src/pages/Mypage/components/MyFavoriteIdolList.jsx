@@ -1,22 +1,20 @@
 import React from 'react';
 import './MyFavoriteIdolList.css';
-import IdolListItem from './IdolListItem';
+import MyIdolListItem from './MyIdolListItem';
 
 function MyFavoriteIdolList() {
   return (
-    <div className="myFavoriteIdolList">
-      <IdolListItem imageClassName="myFavoriteIdol" isDeleteNecessary />
-      <IdolListItem imageClassName="myFavoriteIdol" isDeleteNecessary />
-      <IdolListItem imageClassName="myFavoriteIdol" isDeleteNecessary />
-      <IdolListItem imageClassName="myFavoriteIdol" isDeleteNecessary />
-      <IdolListItem imageClassName="myFavoriteIdol" isDeleteNecessary />
-      <IdolListItem imageClassName="myFavoriteIdol" isDeleteNecessary />
-      <IdolListItem imageClassName="myFavoriteIdol" isDeleteNecessary />
-      <IdolListItem imageClassName="myFavoriteIdol" isDeleteNecessary />
-      <IdolListItem imageClassName="myFavoriteIdol" isDeleteNecessary />
-      <IdolListItem imageClassName="myFavoriteIdol" isDeleteNecessary />
-      <IdolListItem imageClassName="myFavoriteIdol" isDeleteNecessary />
-      <IdolListItem imageClassName="myFavoriteIdol" isDeleteNecessary />
+    <div className="my-favorite-idol-list">
+      <MyIdolListItem idolName="로제" idolGroup="블랙핑크" />
+      <MyIdolListItem idolName="로제" idolGroup="블랙핑크" />
+      <MyIdolListItem idolName="로제" idolGroup="블랙핑크" />
+      <MyIdolListItem idolName="로제" idolGroup="블랙핑크" />
+      <MyIdolListItem idolName="로제" idolGroup="블랙핑크" />
+      <MyIdolListItem idolName="로제" idolGroup="블랙핑크" />
+      <MyIdolListItem idolName="로제" idolGroup="블랙핑크" />
+      <MyIdolListItem idolName="로제" idolGroup="블랙핑크" />
+      <MyIdolListItem idolName="로제" idolGroup="블랙핑크" />
+      <MyIdolListItem idolName="로제" idolGroup="블랙핑크" />
     </div>
   );
 }

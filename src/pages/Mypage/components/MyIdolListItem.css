@@ -7,8 +7,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-right: 24px;
   position: relative;
+}
+
+.idol-list-item.my-favorite-idol {
+  margin-right: 24px;
 }
 
 .deleteButton {
@@ -17,7 +20,7 @@
   right: 0;
 }
 
-.idol-profile-wrapper {
+.idol-profile-wrapper.my-favorite-idol {
   margin-bottom: 8px;
   border: solid 1.31px var(--brand-orange);
   border-radius: 9999px;
@@ -29,14 +32,9 @@
   object-fit: cover;
 }
 
-.myFavoriteIdol {
+.idol-profile.my-favorite-idol {
   width: 100px;
   height: 100px;
-}
-
-.addFavoriteIdol {
-  width: 128px;
-  height: 128px;
 }
 
 .idol-name {
