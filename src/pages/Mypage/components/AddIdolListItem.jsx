@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './AddIdolListItem.css';
 import checkIcon from '../images/ic_check.svg';
 
-function AddIdolListItem({ isSelected, idolData }) {
+function AddIdolListItem({ isSelected = false, idolData }) {
   const { name, group, profilePicture } = idolData;
 
   return (
