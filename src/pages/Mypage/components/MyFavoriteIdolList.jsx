@@ -3,18 +3,20 @@ import './MyFavoriteIdolList.css';
 import MyIdolListItem from './MyIdolListItem';
 
 function MyFavoriteIdolList() {
+  const myFavoriteIdolList = [...JSON.parse(localStorage.getItem('my-favorite-idol'))];
+
   return (
     <div className="my-favorite-idol-list">
-      <MyIdolListItem idolName="로제" idolGroup="블랙핑크" />
-      <MyIdolListItem idolName="로제" idolGroup="블랙핑크" />
-      <MyIdolListItem idolName="로제" idolGroup="블랙핑크" />
-      <MyIdolListItem idolName="로제" idolGroup="블랙핑크" />
-      <MyIdolListItem idolName="로제" idolGroup="블랙핑크" />
-      <MyIdolListItem idolName="로제" idolGroup="블랙핑크" />
-      <MyIdolListItem idolName="로제" idolGroup="블랙핑크" />
-      <MyIdolListItem idolName="로제" idolGroup="블랙핑크" />
-      <MyIdolListItem idolName="로제" idolGroup="블랙핑크" />
-      <MyIdolListItem idolName="로제" idolGroup="블랙핑크" />
+      {myFavoriteIdolList.map((idol) => {
+        return (
+          <MyIdolListItem
+            key={idol.id}
+            idolName={idol.name}
+            idolGroup={idol.group}
+            idolProfilePicture={idol.profilePicture}
+          />
+        );
+      })}
     </div>
   );
 }
