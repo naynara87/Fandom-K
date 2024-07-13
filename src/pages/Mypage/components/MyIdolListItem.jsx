@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import './MyIdolListItem.css';
 import deleteButton from '../images/btn_delete.svg';
-// import testImg from './moma.jpg';
 
 function MyIdolListItem({ idolName, idolGroup, idolProfilePicture }) {
   return (
