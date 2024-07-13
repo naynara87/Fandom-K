@@ -32,7 +32,7 @@ function AddFavoriteIdolList() {
 
   return (
     <>
-      <div className="add-favorite-idol-list">
+      <div className="add-favorite-idol-list-wrapper">
         {idolData.map((idol, index) => {
           return (
             <button
