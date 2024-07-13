@@ -36,7 +36,7 @@ function DonationsModal({ profilePicture, subtitle, title, closeModal }) {
         <h2>후원하기</h2>
         <DeleteButton onClick={closeModal} />
       </div>
-      <img class="profile-picture" src={profilePicture} alt="아이돌 이미지" />
+      <img className="profile-picture" src={profilePicture} alt="아이돌 이미지" />
       <div className="subtitle">{subtitle}</div>
       <div className="title">{title}</div>
       <div className="input-wrapper">
