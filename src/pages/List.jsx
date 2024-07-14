@@ -1,14 +1,14 @@
 import React from 'react';
+import Header from '../components/Header';
 import DonationsList from './components/DonationList';
 import ThisMonthsChart from '../components/ThisMonthsChart';
-import DonationsModal from '../components/DonationsModal/DonationsModal';
 
 function List() {
   return (
     <>
-      <DonationsList />;
+      <Header />
+      <DonationsList />
       <ThisMonthsChart />
-      <DonationsModal />
     </>
   );
 }
