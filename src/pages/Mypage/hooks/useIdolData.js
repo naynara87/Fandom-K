@@ -3,17 +3,19 @@ import getIdolData from '../utils/api';
 
 const useIdolData = () => {
   const [idolData, setIdolData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const handleIdolDataLoad = async () => {
+  const fetchIdolData = async () => {
     const data = await getIdolData();
     setIdolData(data);
+    setIsLoading(false);
   };
 
   useEffect(() => {
-    handleIdolDataLoad();
+    fetchIdolData();
   }, []);
 
-  return idolData;
+  return { idolData, isLoading };
 };
 
 export default useIdolData;

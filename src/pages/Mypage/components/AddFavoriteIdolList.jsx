@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
+import Slider from 'react-slick';
+
+import useIdolData from '../hooks/useIdolData';
+import getIdolChunks from '../utils/getIdolChucks';
 
 import plusIcon from '../assets/images/ic_plus.svg';
 import './AddFavoriteIdolList.css';
 
-import AddIdolListItem from './AddIdolListItem';
-import useIdolData from '../hooks/useIdolData';
+import LoadingBar from '../../../components/Loadingbar';
+import AddIdolListItemButton from './AddIdolListItemButton';
 
 function AddFavoriteIdolList({ myFavoriteIdolList, setMyFavoriteIdolList }) {
-  const idolData = useIdolData(); // 기본 아이돌 데이터
+  const { idolData, isLoading = true } = useIdolData(); // 기본 아이돌 데이터
 
   // 해당 인덱스의 아이돌이 선택되었는지 여부를 저장
   const [isSelected, setIsSelected] = useState(new Array(idolData.length).fill(false));
@@ -41,26 +45,49 @@ function AddFavoriteIdolList({ myFavoriteIdolList, setMyFavoriteIdolList }) {
     setIsSelected(new Array(idolData.length).fill(false));
   };
 
+  const sliderSettings = {
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    infinite: false,
+    prevArrow: <button className="slick-prev" aria-label="이전 슬라이드로 가는 화살표" />,
+    nextArrow: <button className="slick-next" aria-label="이후 슬라이드로 가는 화살표" />,
+  };
+
+  if (isLoading) {
+    return (
+      <div className="add-favorite-idol-list-wrapper">
+        <LoadingBar />
+      </div>
+    );
+  }
+
+  const idolChunks = getIdolChunks(idolData, 16);
+
   return (
     <>
       <div className="add-favorite-idol-list-wrapper">
-        {idolData.map((idol, index) => {
-          return (
-            <button
-              key={idol.id}
-              type="button"
-              aria-label="Add Favorite Idol"
-              onClick={() => handleSelectIdolButtonClick(idol.id, index)}
-            >
-              <AddIdolListItem isSelected={isSelected[index]} idolData={idol} />
-            </button>
-          );
-        })}
+        <Slider
+          slidesToShow={sliderSettings.slidesToShow}
+          slidesToScroll={sliderSettings.slidesToScroll}
+          infinite={sliderSettings.infinite}
+          responsive={sliderSettings.responsive}
+        >
+          {idolChunks.map((idolChunk, idolChunkIndex) => {
+            return (
+              <AddIdolListItemButton
+                key={idolChunkIndex}
+                idolChunk={idolChunk}
+                onClick={handleSelectIdolButtonClick}
+                isSelected={isSelected}
+              />
+            );
+          })}
+        </Slider>
       </div>
       <button
         className="add-favorite-idol-button"
         type="button"
-        aria-label="Add Favorite Idol Button"
+        aria-label="관심 있는 아이돌 추가 버튼"
         onClick={handleAddIdolButtonClick}
       >
         <img className="button-plus-icon" src={plusIcon} alt="plus icon" />
