@@ -19,20 +19,12 @@ function Header() {
     <header className="header-container">
       <div className="header-wrapper">
         <div className="header-logo-container">
-          <button
-            type="button"
-            onClick={handleLogoClick}
-            aria-label="Reload the page"
-          >
+          <button type="button" onClick={handleLogoClick} aria-label="Reload the page">
             <img src={logo} alt="Fandom-k logo" className="header-logo" />
           </button>
         </div>
         <div className="header-profile-container">
-          <button
-            type="button"
-            onClick={handleProfileClick}
-            aria-label="Go to My Page"
-          >
+          <button type="button" onClick={handleProfileClick} aria-label="Go to My Page">
             <img src={profile} alt="Profile" className="header-profile" />
           </button>
         </div>
