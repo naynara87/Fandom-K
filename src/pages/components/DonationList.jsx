@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Slider from 'react-slick';
 
 import calculateTime from '../../utils/deadline';
@@ -9,11 +9,69 @@ import './DonationList.css';
 import '../../components/Slide.css';
 import useDonationList from '../../hooks/useDonationList';
 import DonationsModal from '../../components/DonationsModal/DonationsModal';
+import LackOfCreditModal from '../../components/LackOfCreditModal/LackOfCreditModal';
 
 function DonationsList() {
+  const initialCredit = () => {
+    const storedCredit = localStorage.getItem('myCredit');
+    return storedCredit ? parseInt(storedCredit) : 100;
+  };
+
   const { donations, loading } = useDonationList();
   const [showDonationsModal, setShowDonationsModal] = useState(false);
+  const [showLackOfCreditModal, setShowLackOfCreditModal] = useState(false);
   const [selectedDonation, setSelectedDonation] = useState(null);
+  const [localCredit, setLocalCredit] = useState(initialCredit());
+
+  const handleCreditUpdate = (newCredit) => {
+    setLocalCredit(newCredit);
+    localStorage.setItem('myCredit', newCredit.toString());
+  };
+
+  const openLackOfCreditModal = () => setShowLackOfCreditModal(true);
+
+  const openDonationsModal = (donation) => {
+    setSelectedDonation(donation);
+    setShowDonationsModal(true);
+  };
+
+  const openModal = (donation) => {
+    if (localCredit === 0) openLackOfCreditModal();
+    else openDonationsModal(donation);
+  };
+
+  const closeModal = () => {
+    if (showDonationsModal) {
+      setSelectedDonation(null);
+      setShowDonationsModal(false);
+    }
+    setShowLackOfCreditModal(false);
+  };
+
+  const sliderSettings = useMemo(
+    () => ({
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      infinite: false,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 2.4,
+            slidesToScroll: 1,
+          },
+        },
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 2.1,
+            slidesToScroll: 1,
+          },
+        },
+      ],
+    }),
+    [],
+  );
 
   if (loading) {
     return (
@@ -25,38 +83,6 @@ function DonationsList() {
       </div>
     );
   }
-
-  const openDonationsModal = (donation) => {
-    setSelectedDonation(donation);
-    setShowDonationsModal(true);
-  };
-
-  const closeModal = () => {
-    setSelectedDonation(null);
-    setShowDonationsModal(false);
-  };
-
-  const sliderSettings = {
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    infinite: false,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2.4,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 2.1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
 
   return (
     <>
@@ -74,7 +100,7 @@ function DonationsList() {
               <div className="donation-card" key={donation.id}>
                 <div className="img-wrap">
                   <img src={donation.idol.profilePicture} alt={donation.title} />
-                  <button type="button" onClick={() => openDonationsModal(donation)}>
+                  <button type="button" onClick={() => openModal(donation)}>
                     후원하기
                   </button>
                 </div>
@@ -107,6 +133,9 @@ function DonationsList() {
               title={selectedDonation.title}
               closeModal={closeModal}
             />
+          )}
+          {showLackOfCreditModal && (
+            <LackOfCreditModal closeModal={closeModal} localCredit={localCredit} onUpdate={handleCreditUpdate} />
           )}
         </div>
       </div>
