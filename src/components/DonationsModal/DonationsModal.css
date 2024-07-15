@@ -1,3 +1,15 @@
+.donation-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .donation-wrapper {
   width: 327px;
   height: 509px;
@@ -25,25 +37,25 @@
   text-align: left;
 }
 
-.profile-picture {
+.donation-wrapper .profile-picture {
   width: 158px;
   height: 206px;
   border-radius: 8px;
   margin: 24px 70.5px 10px;
 }
 
-.subtitle {
+.donation-wrapper .subtitle {
   color: var(--white);
   font-size: 12px;
   font-weight: 400;
   line-height: 18px;
   text-align: left;
-  opacity: 0.4px;
+  opacity: 0.4;
 
   margin-left: 70.5px;
 }
 
-.title {
+.donation-wrapper .title {
   color: #f7f7f8;
   font-size: 14px;
   font-weight: 500;
@@ -54,20 +66,27 @@
 }
 
 /* input */
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .input-wrapper {
   display: flex;
   align-items: center;
-  margin: 24px 0;
+  margin-top: 24px;
   position: relative;
 }
 
-input {
+.input-wrapper input {
   width: 295px;
   height: 58px;
   padding: 16px;
   border-radius: 8px;
   border: 1px solid var(--white);
   background-color: #272f3d;
+  color: var(--white);
 }
 
 .input-wrapper img {
@@ -77,24 +96,34 @@ input {
   right: 16px;
 }
 
+.donation-input-error {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14px;
+  text-align: left;
+  color: #ff2626;
+  margin-top: 6px;
+}
+
 /* button */
-.delete-button {
+.icon-btn-close {
   width: 14px;
   height: 14px;
 }
 
-.Button {
+.donation-wrapper .button {
   width: 295px;
   height: 42px;
   padding: 8px;
   border-radius: 3px;
+  margin-top: 24px;
   color: var(--white);
 }
 
-.Button_inactive {
+.button_inactive {
   background-color: #828282;
 }
 
-.Button_active {
-  background-color: linear-gradient(90deg, #f86f65 0%, #fe5493 100%);
+.button_active {
+  background: linear-gradient(90deg, #f86f65 0%, #fe5493 100%);
 }
