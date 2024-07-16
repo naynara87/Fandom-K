@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import donationCredit from '../../../../assets/images/donationCredit.png';
 import CloseButton from './CloseButton';
 import './DonationsModal.css';
@@ -7,9 +6,9 @@ import useEscapeModal from '../../../../hooks/useEscapeModal';
 
 function DonationsModal({
   localCredit,
-  localReceivedDonation,
+  localReceivedDonations,
   onUpdateCredit,
-  onUpdateReceivedDonation,
+  onUpdateReceivedDonations,
   profilePicture,
   subtitle,
   title,
@@ -20,16 +19,13 @@ function DonationsModal({
   const [buttonType, setbuttonType] = useState('inactive');
   const [errorMessage, setErrorMessage] = useState('');
   const [myCredit, setMyCredit] = useState(localCredit);
-  const [receivedDonation, setReceivedDonation] = useState(localReceivedDonation);
+  const [receivedDonations, setReceivedDonations] = useState(localReceivedDonations);
   const [isDonationValid, setIsDonationValid] = useState(false);
 
   useEffect(() => {
     setMyCredit(localCredit);
-  }, [localCredit]);
-
-  useEffect(() => {
-    setReceivedDonation(localReceivedDonation);
-  }, [localReceivedDonation]);
+    setReceivedDonations(localReceivedDonations);
+  }, [localCredit, localReceivedDonations]);
 
   useEscapeModal(closeModal);
 
@@ -38,8 +34,6 @@ function DonationsModal({
       closeModal();
     }
   };
-
-  if (!isOpen) return null;
 
   if (!isOpen) return null;
 
@@ -61,7 +55,7 @@ function DonationsModal({
 
     console.log(myCredit);
     console.log(inputValue);
-    console.log(receivedDonation);
+    console.log(receivedDonations);
   };
 
   //클릭하면 조공완료, localstorage 크레딧 줄어든다.//receiveDonation 충전된다.
@@ -69,8 +63,13 @@ function DonationsModal({
     const newCredit = myCredit - value;
     setMyCredit(newCredit);
     onUpdateCredit(newCredit);
-    // const newReceivedDonation = selectedDonation.receivedDonation + value;
-    // onUpdateReceivedDonation(newReceivedDonation);
+
+    const newReceivedDonations = receivedDonations + value;
+    setReceivedDonations(newReceivedDonations);
+    onUpdateReceivedDonations(newReceivedDonations);
+
+    console.log(receivedDonations);
+    console.log(newReceivedDonations);
     closeModal();
   };
 
