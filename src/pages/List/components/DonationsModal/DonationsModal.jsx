@@ -21,11 +21,15 @@ function DonationsModal({
   const [myCredit, setMyCredit] = useState(localCredit);
   const [receivedDonations, setReceivedDonations] = useState(localReceivedDonations);
   const [isDonationValid, setIsDonationValid] = useState(false);
-
+  const newCredit = myCredit - value;
+  const newReceivedDonations = receivedDonations + value;
   useEffect(() => {
     setMyCredit(localCredit);
     setReceivedDonations(localReceivedDonations);
-  }, [localCredit, localReceivedDonations]);
+    if (receivedDonations === newReceivedDonations) {
+      onUpdateReceivedDonations(newReceivedDonations);
+    }
+  }, [localCredit, localReceivedDonations, receivedDonations]);
 
   useEscapeModal(closeModal);
 
@@ -40,7 +44,7 @@ function DonationsModal({
   // 내 크레딧 값보다 적으면 활성화된다.
   // input 값에 따라 업로드
   const handleInputChange = (e) => {
-    const inputValue = parseInt(e.target.value, 10);
+    const inputValue = parseInt(e.target.value);
     setValue(inputValue);
 
     const ValidDonation = myCredit >= inputValue;
@@ -52,19 +56,14 @@ function DonationsModal({
       setbuttonType('inactive');
       setErrorMessage('갖고 있는 크레딧보다 더 많이 후원할 수 없어요');
     }
-
-    console.log(myCredit);
-    console.log(inputValue);
     console.log(receivedDonations);
   };
 
   //클릭하면 조공완료, localstorage 크레딧 줄어든다.//receiveDonation 충전된다.
   const onClickDonations = () => {
-    const newCredit = myCredit - value;
     setMyCredit(newCredit);
     onUpdateCredit(newCredit);
 
-    const newReceivedDonations = receivedDonations + value;
     setReceivedDonations(newReceivedDonations);
     onUpdateReceivedDonations(newReceivedDonations);
 
