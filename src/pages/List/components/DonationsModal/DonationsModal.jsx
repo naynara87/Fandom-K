@@ -41,8 +41,10 @@ function DonationsModal({
 
   if (!isOpen) return null;
 
-  //내 크레딧 값보다 적으면 활성화된다.
-  //input 값에 따라 업로드
+  if (!isOpen) return null;
+
+  // 내 크레딧 값보다 적으면 활성화된다.
+  // input 값에 따라 업로드
   const handleInputChange = (e) => {
     const inputValue = parseInt(e.target.value, 10);
     setValue(inputValue);
