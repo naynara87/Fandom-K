@@ -10,11 +10,9 @@ const useDonationList = () => {
     const fetchData = async () => {
       try {
         const response = await getDonation();
-        console.log(response.list);
         setDonations(response.list);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching donations:', error);
         setFetchError(error); // 'error' -> 'fetchError'로 수정
         setLoading(false);
       }
