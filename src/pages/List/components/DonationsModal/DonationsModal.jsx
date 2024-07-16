@@ -1,9 +1,9 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import donationCredit from '../../assets/images/donationCredit.png';
+import donationCredit from '../../../../assets/images/donationCredit.png';
 import CloseButton from './CloseButton';
 import './DonationsModal.css';
-import useEscapeModal from '../../hooks/useEscapeModal';
+import useEscapeModal from '../../../../hooks/useEscapeModal';
 
 function DonationsModal({ localCredit, onUpdate, profilePicture, subtitle, title, closeModal, isOpen }) {
   const [value, setValue] = useState('');
