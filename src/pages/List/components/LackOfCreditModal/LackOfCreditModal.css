@@ -23,8 +23,10 @@
 }
 
 .lackOfCredit-wrapper .icon-btn-close {
-  width: 14px;
-  height: 14px;
+  width: 24px;
+  height: 24px;
+  background: url(../../../../assets/images/btn_close.png) no-repeat center center;
+  background-size: cover;
   position: relative;
   left: 271px;
 }
