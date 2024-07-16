@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import donationCredit from '../../assets/images/donationCredit.png';
 import DeleteButton from './DeleteButton';
 import './DonationsModal.css';
@@ -22,8 +21,8 @@ function DonationsModal({ localCredit, onUpdate, profilePicture, subtitle, title
     }
   };
 
-  //내 크레딧 값보다 적으면 활성화된다.
-  //input 값에 따라 업로드
+  // 내 크레딧 값보다 적으면 활성화된다.
+  // input 값에 따라 업로드
   const handleInputChange = (e) => {
     const inputValue = parseInt(e.target.value, 10);
     setValue(inputValue);
@@ -39,7 +38,7 @@ function DonationsModal({ localCredit, onUpdate, profilePicture, subtitle, title
     }
   };
 
-  //클릭하면 조공완료, localstorage 크레딧 줄어든다.
+  // 클릭하면 조공완료, localstorage 크레딧 줄어든다.
   const onClickDonations = () => {
     const newCredit = myCredit - value;
     setMyCredit(newCredit);
