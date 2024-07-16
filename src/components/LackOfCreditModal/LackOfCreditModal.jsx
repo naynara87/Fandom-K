@@ -1,9 +1,12 @@
 import React from 'react';
 import credit from '../../assets/images/credit.svg';
-import DeleteButton from '../DonationsModal/DeleteButton';
+import CloseButton from '../DonationsModal/CloseButton';
 import './LackOfCreditModal.css';
+import useEscapeModal from '../../hooks/useEscapeModal';
 
 function LackOfCreditModal({ closeModal }) {
+  useEscapeModal(closeModal);
+
   const handleBackgroundClick = (e) => {
     if (e.target === e.currentTarget) {
       closeModal();
@@ -14,7 +17,7 @@ function LackOfCreditModal({ closeModal }) {
     <div className="lackOfCredit-background" onClick={handleBackgroundClick}>
       <div className="lackOfCredit-wrapper">
         <div>
-          <DeleteButton onClick={closeModal} />
+          <CloseButton onClick={closeModal} />
         </div>
         <img className="credit" src={credit} alt="크레딧 이미지" />
         <p className="lackOfCredit-title">
