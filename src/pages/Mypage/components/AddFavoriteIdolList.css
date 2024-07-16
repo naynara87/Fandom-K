@@ -23,3 +23,18 @@
 .button-plus-icon {
   margin-right: 8px;
 }
+
+@media (max-width: 1199px) {
+  .add-favorite-idol-list-wrapper {
+    width: 584px;
+    margin: 0 auto;
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 767px) {
+  .add-favorite-idol-list-wrapper {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}

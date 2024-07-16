@@ -1,32 +1,44 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
-
-import useIdolData from '../hooks/useIdolData';
-import getIdolChunks from '../utils/getIdolChucks';
 
 import plusIcon from '../assets/images/ic_plus.svg';
 import './AddFavoriteIdolList.css';
+
+import useIdolData from '../hooks/useIdolData';
+import useIdolChunks from '../hooks/useIdolChunks';
+import useShowArrow from '../hooks/useShowArrow';
 
 import LoadingBar from '../../../components/Loadingbar';
 import AddIdolListItemButton from './AddIdolListItemButton';
 
 function AddFavoriteIdolList({ myFavoriteIdolList, setMyFavoriteIdolList }) {
-  const { idolData, isLoading = true } = useIdolData(); // 기본 아이돌 데이터
+  const { idolData, isLoading = true } = useIdolData();
+  const idolChunks = useIdolChunks(idolData);
+  const showArrow = useShowArrow();
 
-  // 해당 인덱스의 아이돌이 선택되었는지 여부를 저장
-  const [isSelected, setIsSelected] = useState(new Array(idolData.length).fill(false));
-  // 선택된 아이돌 리스트 -> add 버튼이 눌리면 로컬 스토리지에 추가하고, 해당 리스트는 초기화
+  const sliderSettings = {
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    infinite: false,
+    arrows: showArrow,
+  };
+
+  // 특정 아이돌이 선택되었는지 여부를 { 아이디 : 선택 여부 }로 이루어진 객체로 저장
+  const [isSelected, setIsSelected] = useState({});
   const [selectedIdolList, setSelectedIdolList] = useState([]);
 
-  const handleSelectIdolButtonClick = (id, index) => {
-    const updatedSelection = [...isSelected];
-    updatedSelection[index] = !updatedSelection[index];
+  const handleSelectIdolButtonClick = (idolId) => {
+    // 새로 선택된 아이돌의 선택 여부를 -> 이전 선택 여부의 반대로 만듦
+    setIsSelected((prevSelected) => ({
+      ...prevSelected,
+      [idolId]: !prevSelected[idolId],
+    }));
 
-    setIsSelected(updatedSelection);
+    const selected = !isSelected[idolId];
 
-    const updatedIdolList = updatedSelection[index]
-      ? [...selectedIdolList, idolData.find((idol) => idol.id === id)]
-      : selectedIdolList.filter((idol) => idol.id !== id);
+    const updatedIdolList = selected
+      ? [...selectedIdolList, idolData.find((idol) => idol.id === idolId)]
+      : selectedIdolList.filter((idol) => idol.id !== idolId);
 
     setSelectedIdolList(updatedIdolList);
   };
@@ -41,16 +53,8 @@ function AddFavoriteIdolList({ myFavoriteIdolList, setMyFavoriteIdolList }) {
 
     setMyFavoriteIdolList(updatedLocalStorageData);
 
+    setIsSelected({});
     setSelectedIdolList([]);
-    setIsSelected(new Array(idolData.length).fill(false));
-  };
-
-  const sliderSettings = {
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    infinite: false,
-    prevArrow: <button className="slick-prev" aria-label="이전 슬라이드로 가는 화살표" />,
-    nextArrow: <button className="slick-next" aria-label="이후 슬라이드로 가는 화살표" />,
   };
 
   if (isLoading) {
@@ -61,8 +65,6 @@ function AddFavoriteIdolList({ myFavoriteIdolList, setMyFavoriteIdolList }) {
     );
   }
 
-  const idolChunks = getIdolChunks(idolData, 16);
-
   return (
     <>
       <div className="add-favorite-idol-list-wrapper">
@@ -70,7 +72,7 @@ function AddFavoriteIdolList({ myFavoriteIdolList, setMyFavoriteIdolList }) {
           slidesToShow={sliderSettings.slidesToShow}
           slidesToScroll={sliderSettings.slidesToScroll}
           infinite={sliderSettings.infinite}
-          responsive={sliderSettings.responsive}
+          arrows={sliderSettings.arrows}
         >
           {idolChunks.map((idolChunk, idolChunkIndex) => {
             return (
