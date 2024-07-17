@@ -21,25 +21,13 @@ function DonationsModal({
   const [myCredit, setMyCredit] = useState(localCredit);
   const [receivedDonations, setReceivedDonations] = useState(localReceivedDonations);
   const [isDonationValid, setIsDonationValid] = useState(false);
-  const newCredit = myCredit - value;
-  const newReceivedDonations = receivedDonations + value;
+
   useEffect(() => {
     setMyCredit(localCredit);
     setReceivedDonations(localReceivedDonations);
-    if (receivedDonations === newReceivedDonations) {
-      onUpdateReceivedDonations(newReceivedDonations);
-    }
-  }, [localCredit, localReceivedDonations, receivedDonations]);
 
-  useEscapeModal(closeModal);
-
-  const handleBackgroundClick = (e) => {
-    if (e.target === e.currentTarget) {
-      closeModal();
-    }
-  };
-
-  if (!isOpen) return null;
+    console.log(receivedDonations);
+  }, [localCredit, localReceivedDonations]);
 
   // 내 크레딧 값보다 적으면 활성화된다.
   // input 값에 따라 업로드
@@ -56,21 +44,38 @@ function DonationsModal({
       setbuttonType('inactive');
       setErrorMessage('갖고 있는 크레딧보다 더 많이 후원할 수 없어요');
     }
-    console.log(receivedDonations);
+    console.log(receivedDonations); //localReceivedDonations 값
   };
 
   //클릭하면 조공완료, localstorage 크레딧 줄어든다.//receiveDonation 충전된다.
   const onClickDonations = () => {
+    const newCredit = myCredit - value;
     setMyCredit(newCredit);
     onUpdateCredit(newCredit);
 
+    const newReceivedDonations = receivedDonations + value;
+
     setReceivedDonations(newReceivedDonations);
-    onUpdateReceivedDonations(newReceivedDonations);
+
+    setTimeout(() => {
+      onUpdateReceivedDonations(newReceivedDonations);
+    }, 500);
 
     console.log(receivedDonations);
-    console.log(newReceivedDonations);
+    console.log(`${receivedDonations} + ${value}`);
+
     closeModal();
   };
+
+  const handleBackgroundClick = (e) => {
+    if (e.target === e.currentTarget) {
+      closeModal();
+    }
+  };
+
+  useEscapeModal();
+
+  if (!isOpen) return null;
 
   return (
     <div className="donation-background" onClick={handleBackgroundClick}>
