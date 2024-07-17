@@ -1,19 +1,19 @@
-import React, { useState, useMemo, useEffect } from 'react';
-import Slider from 'react-slick';
+import React, { useState, useMemo, useEffect } from "react";
+import Slider from "react-slick";
 
-import calculateTime from '../../../utils/deadline';
-import formatNumber from '../../../utils/formatNumber';
-import Loadingbar from '../../../components/Loadingbar';
+import calculateTime from "../../../utils/deadline";
+import formatNumber from "../../../utils/formatNumber";
+import Loadingbar from "../../../components/Loadingbar";
 
-import './DonationList.css';
+import "./DonationList.css";
 
-import useDonationList from '../../../hooks/useDonationList';
-import DonationsModal from './DonationsModal/DonationsModal';
-import LackOfCreditModal from './LackOfCreditModal/LackOfCreditModal';
+import useDonationList from "../../../hooks/useDonationList";
+import DonationsModal from "./DonationsModal/DonationsModal";
+import LackOfCreditModal from "./LackOfCreditModal/LackOfCreditModal";
 
 function DonationsList() {
   const initialCredit = () => {
-    const storedCredit = JSON.parse(localStorage.getItem('myCredit'));
+    const storedCredit = JSON.parse(localStorage.getItem("myCredit"));
     return storedCredit ? storedCredit : 0;
   };
 
@@ -26,7 +26,7 @@ function DonationsList() {
 
   const handleCreditUpdate = (newCredit) => {
     setLocalCredit(newCredit);
-    localStorage.setItem('myCredit', newCredit.toString());
+    localStorage.setItem("myCredit", newCredit.toString());
   };
 
   const handleReceivedDonationsUpdate = (newReceivedDonations) => {
@@ -36,7 +36,7 @@ function DonationsList() {
       ...prevSelectedDonation,
       receivedDonations: newReceivedDonations,
     }));
-    localStorage.setItem('selectedDonation', JSON.stringify(selectedDonation));
+    localStorage.setItem("selectedDonation", JSON.stringify(selectedDonation));
 
     console.log(localReceivedDonations);
     console.log(selectedDonation);
@@ -60,13 +60,13 @@ function DonationsList() {
   const openModal = (donation) => {
     if (localCredit <= 0) {
       openLackOfCreditModal();
-      console.log('크레딧 없음');
+      console.log("크레딧 없음");
     } else {
       openDonationsModal(donation);
 
-      console.log('선택된 후원:', selectedDonation);
-      console.log('receivedDonation 값:', localReceivedDonations);
-      console.log('테스트');
+      console.log("선택된 후원:", selectedDonation);
+      console.log("receivedDonation 값:", localReceivedDonations);
+      console.log("테스트");
     }
   };
 
@@ -75,7 +75,7 @@ function DonationsList() {
       setShowDonationsModal(false);
 
       console.log(selectedDonation);
-      console.log('newReceivedDonations 값:', localReceivedDonations);
+      console.log("newReceivedDonations 값:", localReceivedDonations);
     }
     setShowLackOfCreditModal(false);
   };
@@ -87,7 +87,7 @@ function DonationsList() {
       infinite: false,
       responsive: [
         {
-          breakpoint: 1024,
+          breakpoint: 1200,
           settings: {
             slidesToShow: 2.5,
             slidesToScroll: 1,
@@ -102,7 +102,7 @@ function DonationsList() {
         },
       ],
     }),
-    [],
+    []
   );
 
   if (loading) {
@@ -131,7 +131,10 @@ function DonationsList() {
             {donations.map((donation) => (
               <div className="donation-card" key={donation.id}>
                 <div className="img-wrap">
-                  <img src={donation.idol.profilePicture} alt={donation.title} />
+                  <img
+                    src={donation.idol.profilePicture}
+                    alt={donation.title}
+                  />
                   <button
                     type="button"
                     onClick={() => {
@@ -150,14 +153,17 @@ function DonationsList() {
                         <i className="icon icon-credit" />
                         {formatNumber(donation.targetDonation)}
                       </div>
-                      <div className="deadline">{calculateTime(donation.deadline)}</div>
+                      <div className="deadline">
+                        {calculateTime(donation.deadline)}
+                      </div>
                     </div>
                     <div className="progress-bar">
                       <div
                         className="percent"
                         style={{
                           width:
-                            selectedDonation && selectedDonation.id === donation.id
+                            selectedDonation &&
+                            selectedDonation.id === donation.id
                               ? `${(localReceivedDonations / donation.targetDonation) * 100}%`
                               : undefined,
                         }}
@@ -182,7 +188,11 @@ function DonationsList() {
             />
           )}
           {showLackOfCreditModal && (
-            <LackOfCreditModal closeModal={closeModal} localCredit={localCredit} onUpdate={handleCreditUpdate} />
+            <LackOfCreditModal
+              closeModal={closeModal}
+              localCredit={localCredit}
+              onUpdate={handleCreditUpdate}
+            />
           )}
         </div>
       </div>
