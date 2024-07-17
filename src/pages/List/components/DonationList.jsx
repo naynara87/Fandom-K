@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useContext } from "react";
 import Slider from "react-slick";
 
 import calculateTime from "../../../utils/deadline";
@@ -11,36 +11,19 @@ import useDonationList from "../../../hooks/useDonationList";
 import DonationsModal from "./DonationsModal/DonationsModal";
 import LackOfCreditModal from "./LackOfCreditModal/LackOfCreditModal";
 
-function DonationsList() {
-  const initialCredit = () => {
-    const storedCredit = JSON.parse(localStorage.getItem("myCredit"));
-    return storedCredit ? storedCredit : 0;
-  };
+import { CreditContext } from "../../../components/CreditContextProvider";
 
+function DonationsList() {
+  const {
+    selectedDonation,
+    setSelectedDonation,
+    localCredit,
+    localReceivedDonations,
+    setLocalReceivedDonations,
+  } = useContext(CreditContext);
   const { donations, loading } = useDonationList();
   const [showDonationsModal, setShowDonationsModal] = useState(false);
   const [showLackOfCreditModal, setShowLackOfCreditModal] = useState(false);
-  const [selectedDonation, setSelectedDonation] = useState({});
-  const [localCredit, setLocalCredit] = useState(initialCredit());
-  const [localReceivedDonations, setLocalReceivedDonations] = useState();
-
-  const handleCreditUpdate = (newCredit) => {
-    setLocalCredit(newCredit);
-    localStorage.setItem("myCredit", newCredit.toString());
-  };
-
-  const handleReceivedDonationsUpdate = (newReceivedDonations) => {
-    setLocalReceivedDonations(newReceivedDonations);
-    //객체의 속성 업데이트
-    setSelectedDonation((prevSelectedDonation) => ({
-      ...prevSelectedDonation,
-      receivedDonations: newReceivedDonations,
-    }));
-    localStorage.setItem("selectedDonation", JSON.stringify(selectedDonation));
-
-    console.log(localReceivedDonations);
-    console.log(selectedDonation);
-  };
 
   const openLackOfCreditModal = () => setShowLackOfCreditModal(true);
 
@@ -180,19 +163,12 @@ function DonationsList() {
               subtitle={selectedDonation.subtitle}
               title={selectedDonation.title}
               closeModal={closeModal}
-              onUpdateCredit={handleCreditUpdate}
-              onUpdateReceivedDonations={handleReceivedDonationsUpdate}
-              localCredit={localCredit}
-              localReceivedDonations={localReceivedDonations}
               isOpen={showDonationsModal}
             />
           )}
           {showLackOfCreditModal && (
-            <LackOfCreditModal
-              closeModal={closeModal}
-              localCredit={localCredit}
-              onUpdate={handleCreditUpdate}
-            />
+            <LackOfCreditModal closeModal={closeModal} />
+
           )}
         </div>
       </div>

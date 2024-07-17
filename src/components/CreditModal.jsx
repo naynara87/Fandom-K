@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
-import './CreditModal.css';
-import CreditIcon from '../assets/images/ico_credit.png';
-import CreditWhiteIcon from '../assets/images/ico_credit.svg';
+import "./CreditModal.css";
+import { useState, useContext } from "react";
+import CreditIcon from "../assets/images/ico_credit.png";
+import CreditWhiteIcon from "../assets/images/ico_credit.svg";
+import { CreditContext } from "./CreditContextProvider";
 
-function CreditModal({ onClose, onRecharge }) {
+function CreditModal({ onClose }) {
+  const { handleRecharge } = useContext(CreditContext);
+
   const [selectedCredit, setSelectedCredit] = useState(100);
 
   const creditOptions = [100, 500, 1000];
