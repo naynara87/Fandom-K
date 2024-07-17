@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import donationCredit from '../../../../assets/images/donationCredit.png';
 import CloseButton from './CloseButton';
 import './DonationsModal.css';
@@ -7,9 +6,9 @@ import useEscapeModal from '../../../../hooks/useEscapeModal';
 
 function DonationsModal({
   localCredit,
-  localReceivedDonation,
+  localReceivedDonations,
   onUpdateCredit,
-  onUpdateReceivedDonation,
+  onUpdateReceivedDonations,
   profilePicture,
   subtitle,
   title,
@@ -20,33 +19,20 @@ function DonationsModal({
   const [buttonType, setbuttonType] = useState('inactive');
   const [errorMessage, setErrorMessage] = useState('');
   const [myCredit, setMyCredit] = useState(localCredit);
-  const [receivedDonation, setReceivedDonation] = useState(localReceivedDonation);
+  const [receivedDonations, setReceivedDonations] = useState(localReceivedDonations);
   const [isDonationValid, setIsDonationValid] = useState(false);
 
   useEffect(() => {
     setMyCredit(localCredit);
-  }, [localCredit]);
+    setReceivedDonations(localReceivedDonations);
 
-  useEffect(() => {
-    setReceivedDonation(localReceivedDonation);
-  }, [localReceivedDonation]);
-
-  useEscapeModal(closeModal);
-
-  const handleBackgroundClick = (e) => {
-    if (e.target === e.currentTarget) {
-      closeModal();
-    }
-  };
-
-  if (!isOpen) return null;
-
-  if (!isOpen) return null;
+    console.log(receivedDonations);
+  }, [localCredit, localReceivedDonations]);
 
   // 내 크레딧 값보다 적으면 활성화된다.
   // input 값에 따라 업로드
   const handleInputChange = (e) => {
-    const inputValue = parseInt(e.target.value, 10);
+    const inputValue = parseInt(e.target.value);
     setValue(inputValue);
 
     const ValidDonation = myCredit >= inputValue;
@@ -58,10 +44,7 @@ function DonationsModal({
       setbuttonType('inactive');
       setErrorMessage('갖고 있는 크레딧보다 더 많이 후원할 수 없어요');
     }
-
-    console.log(myCredit);
-    console.log(inputValue);
-    console.log(receivedDonation);
+    console.log(receivedDonations); //localReceivedDonations 값
   };
 
   //클릭하면 조공완료, localstorage 크레딧 줄어든다.//receiveDonation 충전된다.
@@ -69,14 +52,34 @@ function DonationsModal({
     const newCredit = myCredit - value;
     setMyCredit(newCredit);
     onUpdateCredit(newCredit);
-    // const newReceivedDonation = selectedDonation.receivedDonation + value;
-    // onUpdateReceivedDonation(newReceivedDonation);
+
+    const newReceivedDonations = receivedDonations + value;
+
+    setReceivedDonations(newReceivedDonations);
+
+    setTimeout(() => {
+      onUpdateReceivedDonations(newReceivedDonations);
+    }, 500);
+
+    console.log(receivedDonations);
+    console.log(`${receivedDonations} + ${value}`);
+
     closeModal();
   };
 
+  const handleBackgroundClick = (e) => {
+    if (e.target === e.currentTarget) {
+      closeModal();
+    }
+  };
+
+  useEscapeModal();
+
+  if (!isOpen) return null;
+
   return (
     <div className="donation-background" onClick={handleBackgroundClick}>
-      <div className="donation-wrapper" style={{ height: errorMessage ? '529px' : '509px' }}>
+      <div className="donation-modal" style={{ height: errorMessage ? '529px' : '509px' }}>
         <div className="donation-header">
           <h2>후원하기</h2>
           <CloseButton onClick={closeModal} />

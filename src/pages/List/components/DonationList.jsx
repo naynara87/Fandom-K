@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Slider from 'react-slick';
 
 import calculateTime from '../../../utils/deadline';
@@ -17,26 +17,29 @@ function DonationsList() {
     return storedCredit ? storedCredit : 0;
   };
 
-  const initialReceivedDonation = () => {
-    const storedReceivedDonation = JSON.parse(localStorage.getItem('receivedDonation'));
-    return storedReceivedDonation ? storedReceivedDonation : 0;
-  };
-
   const { donations, loading } = useDonationList();
   const [showDonationsModal, setShowDonationsModal] = useState(false);
   const [showLackOfCreditModal, setShowLackOfCreditModal] = useState(false);
-  const [selectedDonation, setSelectedDonation] = useState(null);
+  const [selectedDonation, setSelectedDonation] = useState({});
   const [localCredit, setLocalCredit] = useState(initialCredit());
-  const [localReceivedDonation, setLocalReceivedDonation] = useState(initialReceivedDonation());
+  const [localReceivedDonations, setLocalReceivedDonations] = useState();
 
   const handleCreditUpdate = (newCredit) => {
     setLocalCredit(newCredit);
     localStorage.setItem('myCredit', newCredit.toString());
   };
 
-  const handleReceivedDonationUpdate = (newReceivedDonation) => {
-    setLocalReceivedDonation(newReceivedDonation);
-    localStorage.setItem('receivedDonation', newReceivedDonation.toString());
+  const handleReceivedDonationsUpdate = (newReceivedDonations) => {
+    setLocalReceivedDonations(newReceivedDonations);
+    //객체의 속성 업데이트
+    setSelectedDonation((prevSelectedDonation) => ({
+      ...prevSelectedDonation,
+      receivedDonations: newReceivedDonations,
+    }));
+    localStorage.setItem('selectedDonation', JSON.stringify(selectedDonation));
+
+    console.log(localReceivedDonations);
+    console.log(selectedDonation);
   };
 
   const openLackOfCreditModal = () => setShowLackOfCreditModal(true);
@@ -44,8 +47,15 @@ function DonationsList() {
   const openDonationsModal = (donation) => {
     setSelectedDonation(donation);
     setShowDonationsModal(true);
-    console.log('테스트');
+    console.log(localReceivedDonations);
   };
+
+  useEffect(() => {
+    if (selectedDonation) {
+      setLocalReceivedDonations(selectedDonation.receivedDonations);
+      console.log(selectedDonation);
+    }
+  }, [selectedDonation.id]); //selectedDonation이 있으면 바꿔줌 selectedDonation이 바뀔때마다
 
   const openModal = (donation) => {
     if (localCredit <= 0) {
@@ -54,18 +64,18 @@ function DonationsList() {
     } else {
       openDonationsModal(donation);
 
-      // const clickedDonation = data.find((selectedDonation) => selectedDonation.id === id);
-      // if (clickedDonation) {
-      //   const { receivedDonation } = clickedDonation;
-      //   setLocalReceivedDonation(receivedDonation);
-      // }
+      console.log('선택된 후원:', selectedDonation);
+      console.log('receivedDonation 값:', localReceivedDonations);
+      console.log('테스트');
     }
   };
 
   const closeModal = () => {
     if (showDonationsModal) {
-      setSelectedDonation(null);
       setShowDonationsModal(false);
+
+      console.log(selectedDonation);
+      console.log('newReceivedDonations 값:', localReceivedDonations);
     }
     setShowLackOfCreditModal(false);
   };
@@ -122,7 +132,12 @@ function DonationsList() {
               <div className="donation-card" key={donation.id}>
                 <div className="img-wrap">
                   <img src={donation.idol.profilePicture} alt={donation.title} />
-                  <button type="button" onClick={() => openModal(donation)}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      openModal(donation);
+                    }}
+                  >
                     후원하기
                   </button>
                 </div>
@@ -140,7 +155,12 @@ function DonationsList() {
                     <div className="progress-bar">
                       <div
                         className="percent"
-                        style={{ width: `${(donation.receivedDonations / donation.targetDonation) * 100}%` }}
+                        style={{
+                          width:
+                            selectedDonation && selectedDonation.id === donation.id
+                              ? `${(localReceivedDonations / donation.targetDonation) * 100}%`
+                              : undefined,
+                        }}
                       />
                     </div>
                   </div>
@@ -155,9 +175,9 @@ function DonationsList() {
               title={selectedDonation.title}
               closeModal={closeModal}
               onUpdateCredit={handleCreditUpdate}
-              onUpdateReceivedDonation={handleReceivedDonationUpdate}
+              onUpdateReceivedDonations={handleReceivedDonationsUpdate}
               localCredit={localCredit}
-              localReceivedDonation={localReceivedDonation}
+              localReceivedDonations={localReceivedDonations}
               isOpen={showDonationsModal}
             />
           )}
