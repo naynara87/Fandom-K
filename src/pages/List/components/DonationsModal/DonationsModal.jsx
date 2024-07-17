@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import donationCredit from "../../../../assets/images/donationCredit.png";
 import CloseButton from "./CloseButton";
 import "./DonationsModal.css";
@@ -16,6 +16,7 @@ function DonationsModal({
     handleCreditUpdate,
     handleReceivedDonationsUpdate,
     localReceivedDonations,
+    localCredit,
   } = useContext(CreditContext);
   const [value, setValue] = useState("");
   const [buttonType, setbuttonType] = useState("inactive");
