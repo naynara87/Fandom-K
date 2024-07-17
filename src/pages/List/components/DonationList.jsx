@@ -10,6 +10,7 @@ import "./DonationList.css";
 import useDonationList from "../../../hooks/useDonationList";
 import DonationsModal from "./DonationsModal/DonationsModal";
 import LackOfCreditModal from "./LackOfCreditModal/LackOfCreditModal";
+
 import { CreditContext } from "../../../components/CreditContextProvider";
 
 function DonationsList() {
@@ -69,7 +70,7 @@ function DonationsList() {
       infinite: false,
       responsive: [
         {
-          breakpoint: 1024,
+          breakpoint: 1200,
           settings: {
             slidesToShow: 2.5,
             slidesToScroll: 1,
@@ -167,6 +168,7 @@ function DonationsList() {
           )}
           {showLackOfCreditModal && (
             <LackOfCreditModal closeModal={closeModal} />
+
           )}
         </div>
       </div>
