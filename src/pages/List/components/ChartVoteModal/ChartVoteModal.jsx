@@ -34,13 +34,13 @@ function ChartVoteModal({ closeModal, idolRank, gender }) {
     <div className="modal-overlay">
       <div className="chart-modal">
         <div className="modal-header">
-          <h2>이달의 {gender === "female" ? "여자" : "남자"} 아이돌</h2>
+          <h2>이달의 {gender === 'female' ? '여자' : '남자'} 아이돌</h2>
           <button
             className="close-btn"
             onClick={closeModal}
             aria-label="모달 닫기 버튼"
           >
-            <i className="icon-btn-close"></i>
+            <i className="icon-btn-close" />
           </button>
         </div>
         <div className="modal-content">
@@ -48,7 +48,7 @@ function ChartVoteModal({ closeModal, idolRank, gender }) {
             <IdolDetail
               key={idol.id}
               idolData={idol}
-              isNeedRadio={true}
+              isNeedRadio
               isSelected={selectedIdolId === idol.id}
               onRadioChange={() => handleIdolRadioClick(idol.id)}
             />
