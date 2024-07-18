@@ -144,11 +144,7 @@ function DonationsList() {
                       <div
                         className="percent"
                         style={{
-                          width:
-                            selectedDonation &&
-                            selectedDonation.id === donation.id
-                              ? `${(localReceivedDonations / donation.targetDonation) * 100}%`
-                              : undefined,
+                          width: `${(donation.receivedDonations / donation.targetDonation) * 100}%`,
                         }}
                       />
                     </div>
@@ -168,7 +164,6 @@ function DonationsList() {
           )}
           {showLackOfCreditModal && (
             <LackOfCreditModal closeModal={closeModal} />
-
           )}
         </div>
       </div>
