@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import "./ChartVoteModal.css";
-import IdolDetail from "../IdolDetail";
+import React, { useState } from 'react';
+import './ChartVoteModal.css';
+import IdolDetail from '../IdolDetail';
 
 function ChartVoteModal({ onClose, idolRank, gender }) {
   const initialSelectedState = idolRank.reduce((acc, idol) => {
@@ -31,7 +31,7 @@ function ChartVoteModal({ onClose, idolRank, gender }) {
     <div className="modal-overlay">
       <div className="chart-modal">
         <div className="modal-header">
-          <h2>이달의 {gender === "female" ? "여자" : "남자"} 아이돌</h2>
+          <h2>이달의 {gender === 'female' ? '여자' : '남자'} 아이돌</h2>
           <button className="close-btn" onClick={onClose}>
             X
           </button>
@@ -42,7 +42,7 @@ function ChartVoteModal({ onClose, idolRank, gender }) {
               <IdolDetail
                 key={idol.id}
                 idolData={idol}
-                isNeedRadio={true}
+                isNeedRadio
                 isSelected={selectedIdols[idol.id]}
                 onRadioChange={() => handleIdolRadioClick(idol.id)}
               />

@@ -1,7 +1,7 @@
 import React from 'react';
 import credit from '../../../../assets/images/credit.svg';
-import CloseButton from '../DonationsModal/CloseButton';
 import './LackOfCreditModal.css';
+import CloseButton from '../DonationsModal/CloseButton';
 import useEscapeModal from '../../../../hooks/useEscapeModal';
 
 function LackOfCreditModal({ closeModal }) {
@@ -14,7 +14,10 @@ function LackOfCreditModal({ closeModal }) {
   };
 
   return (
-    <div className="lack-of-credit-modal-background" onClick={handleBackgroundClick}>
+    <div
+      className="lack-of-credit-modal-background"
+      onClick={handleBackgroundClick}
+    >
       <div className="lack-of-credit-modal">
         <div>
           <CloseButton onClick={closeModal} />
