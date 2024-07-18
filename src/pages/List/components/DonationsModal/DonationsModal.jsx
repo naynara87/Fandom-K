@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
-import donationCredit from '../../../../assets/images/donationCredit.png';
-import './DonationsModal.css';
-import CloseButton from './CloseButton';
-import useEscapeModal from '../../../../hooks/useEscapeModal';
-import { CreditContext } from '../../../../components/CreditContextProvider';
+import React, { useState, useEffect, useContext } from "react";
+import donationCredit from "../../../../assets/images/donationCredit.png";
+import "./DonationsModal.css";
+import CloseButton from "./CloseButton";
+import useEscapeModal from "../../../../hooks/useEscapeModal";
+import { CreditContext } from "../../../../components/CreditContextProvider";
 
 function DonationsModal({
   profilePicture,
@@ -18,12 +18,12 @@ function DonationsModal({
     localReceivedDonations,
     localCredit,
   } = useContext(CreditContext);
-  const [value, setValue] = useState('');
-  const [buttonType, setbuttonType] = useState('inactive');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [value, setValue] = useState("");
+  const [buttonType, setbuttonType] = useState("inactive");
+  const [errorMessage, setErrorMessage] = useState("");
   const [myCredit, setMyCredit] = useState(localCredit);
   const [receivedDonations, setReceivedDonations] = useState(
-    localReceivedDonations,
+    localReceivedDonations
   );
   const [isDonationValid, setIsDonationValid] = useState(false);
 
@@ -42,12 +42,12 @@ function DonationsModal({
 
     const ValidDonation = myCredit >= inputValue;
     if (ValidDonation) {
-      setbuttonType('active');
-      setErrorMessage('');
+      setbuttonType("active");
+      setErrorMessage("");
       setIsDonationValid(true);
     } else {
-      setbuttonType('inactive');
-      setErrorMessage('갖고 있는 크레딧보다 더 많이 후원할 수 없어요');
+      setbuttonType("inactive");
+      setErrorMessage("갖고 있는 크레딧보다 더 많이 후원할 수 없어요");
     }
     console.log(receivedDonations); // localReceivedDonations 값
   };
@@ -61,12 +61,12 @@ function DonationsModal({
     const newReceivedDonations = receivedDonations + value;
 
     setReceivedDonations(newReceivedDonations);
+    console.log(receivedDonations);
 
     setTimeout(() => {
       handleReceivedDonationsUpdate(newReceivedDonations);
     }, 500);
 
-    console.log(receivedDonations);
     console.log(`${receivedDonations} + ${value}`);
 
     closeModal();
@@ -86,7 +86,7 @@ function DonationsModal({
     <div className="donation-background" onClick={handleBackgroundClick}>
       <div
         className="donation-modal"
-        style={{ height: errorMessage ? '529px' : '509px' }}
+        style={{ height: errorMessage ? "529px" : "509px" }}
       >
         <div className="donation-header">
           <h2>후원하기</h2>
@@ -106,7 +106,7 @@ function DonationsModal({
             value={value}
             placeholder="크레딧 입력"
             onChange={handleInputChange}
-            style={{ borderColor: errorMessage ? 'red' : '' }}
+            style={{ borderColor: errorMessage ? "red" : "" }}
           />
           <img src={donationCredit} alt="크레딧 이미지" />
         </div>
