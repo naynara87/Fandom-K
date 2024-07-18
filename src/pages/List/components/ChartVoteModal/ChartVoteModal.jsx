@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./ChartVoteModal.css";
 import IdolDetail from "../IdolDetail";
 
+
 function ChartVoteModal({ closeModal, idolRank, gender }) {
   // State to keep track of selected idol
   const [selectedIdolId, setSelectedIdolId] = useState(null);
