@@ -1,53 +1,56 @@
-import React, { useState } from 'react';
-import './ChartVoteModal.css';
-import IdolDetail from '../IdolDetail';
+import React, { useState, useEffect } from "react";
+import "./ChartVoteModal.css";
+import IdolDetail from "../IdolDetail";
 
-function ChartVoteModal({ onClose, idolRank, gender }) {
-  const initialSelectedState = idolRank.reduce((acc, idol) => {
-    acc[idol.id] = false;
-    return acc;
-  }, {});
 
-  const [selectedIdols, setSelectedIdols] = useState(initialSelectedState);
+function ChartVoteModal({ closeModal, idolRank, gender }) {
+  // State to keep track of selected idol
+  const [selectedIdolId, setSelectedIdolId] = useState(null);
 
+  // Effect to select the first idol when idolRank or gender changes
+  useEffect(() => {
+    if (idolRank.length > 0) {
+      setSelectedIdolId(idolRank[0].id); // Select the first idol initially
+    }
+  }, [idolRank, gender]);
+
+  // Handler to update selected idol
   const handleIdolRadioClick = (idolId) => {
-    const newSelectedState = Object.keys(selectedIdols).reduce((acc, key) => {
-      acc[key] = key === idolId;
-      return acc;
-    }, {});
-
-    setSelectedIdols(newSelectedState);
+    setSelectedIdolId(idolId);
   };
 
-  const handleVoteButtonClick = (prevTotalVotes) => {
-    const updatedTotalVotes = prevTotalVotes + 1000;
-
-    // **********totalVotes 업데이트**********
-
-    setIsSelected({});
+  // Handler for vote button click
+  const handleVoteButtonClick = () => {
+    if (selectedIdolId) {
+      console.log(`Voted for idol with id: ${selectedIdolId}`);
+      // Handle vote logic here
+    }
+    console.log("Voted!");
   };
 
   return (
     <div className="modal-overlay">
       <div className="chart-modal">
         <div className="modal-header">
-          <h2>이달의 {gender === 'female' ? '여자' : '남자'} 아이돌</h2>
-          <button className="close-btn" onClick={onClose}>
-            X
+          <h2>이달의 {gender === "female" ? "여자" : "남자"} 아이돌</h2>
+          <button
+            className="close-btn"
+            onClick={closeModal}
+            aria-label="모달 닫기 버튼"
+          >
+            <i className="icon-btn-close"></i>
           </button>
         </div>
         <div className="modal-content">
-          <div className="ranking-list">
-            {idolRank.map((idol) => (
-              <IdolDetail
-                key={idol.id}
-                idolData={idol}
-                isNeedRadio
-                isSelected={selectedIdols[idol.id]}
-                onRadioChange={() => handleIdolRadioClick(idol.id)}
-              />
-            ))}
-          </div>
+          {idolRank.map((idol) => (
+            <IdolDetail
+              key={idol.id}
+              idolData={idol}
+              isNeedRadio={true}
+              isSelected={selectedIdolId === idol.id}
+              onRadioChange={() => handleIdolRadioClick(idol.id)}
+            />
+          ))}
         </div>
         <div className="modal-footer">
           <button className="modal-vote-btn" onClick={handleVoteButtonClick}>
