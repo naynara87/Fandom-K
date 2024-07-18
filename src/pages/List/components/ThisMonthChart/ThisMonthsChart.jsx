@@ -5,7 +5,6 @@ import ChartVoteModal from "../ChartVoteModal/ChartVoteModal";
 import useIdolChart from "../../../../hooks/useIdolChart";
 import Loadingbar from "../../../../components/Loadingbar";
 
-
 const getPageSize = () => {
   const width = window.innerWidth;
   if (width < 1200) {
@@ -15,11 +14,11 @@ const getPageSize = () => {
 };
 
 function ThisMonthsChart() {
-  const [activeTab, setActiveTab] = useState('female');
+  const [activeTab, setActiveTab] = useState("female");
   const [pageSize, setPageSize] = useState(getPageSize());
   const { idolRank, loading, fetchError, fetchData } = useIdolChart(
     activeTab,
-    pageSize,
+    pageSize
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [displayCount, setDisplayCount] = useState(pageSize);
@@ -31,24 +30,25 @@ function ThisMonthsChart() {
       setDisplayCount(newPageSize);
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
   const openGenderVoteModal = () => {
     setIsModalOpen(true);
   };
-
+  const updateIdolRank = () => {
+    fetchData(true);
+  };
   const closeModal = () => {
     setIsModalOpen(false);
   };
 
   const tab = (gender) => {
     setActiveTab(gender);
-    setDisplayCount(pageSize); // 탭 변경 시 초기 표시 수로 리셋
-    fetchData(gender, pageSize); // 새로운 데이터 가져오기
+    setDisplayCount(pageSize);
   };
 
   const loadMore = () => {
@@ -72,26 +72,27 @@ function ThisMonthsChart() {
       <div className="chart-tab">
         <button
           type="button"
-          className={`chart-tab-button ${activeTab === 'female' ? 'active' : ''}`}
-          onClick={() => tab('female')}
+          className={`chart-tab-button ${activeTab === "female" ? "active" : ""}`}
+          onClick={() => tab("female")}
         >
           이달의 여자 아이돌
         </button>
         <button
           type="button"
-          className={`chart-tab-button ${activeTab === 'male' ? 'active' : ''}`}
-          onClick={() => tab('male')}
+          className={`chart-tab-button ${activeTab === "male" ? "active" : ""}`}
+          onClick={() => tab("male")}
         >
           이달의 남자 아이돌
         </button>
       </div>
+
+      {loading && (
+        <div className="chart-wrap">
+          <Loadingbar />
+        </div>
+      )}
+      {fetchError && <div>Error loading data</div>}
       <ul className="ranking-list">
-        {loading && (
-          <div>
-            <Loadingbar />
-          </div>
-        )}
-        {fetchError && <div>Error loading data</div>}
         {!loading &&
           !fetchError &&
           idolRank
@@ -113,6 +114,7 @@ function ThisMonthsChart() {
           closeModal={closeModal}
           idolRank={idolRank}
           gender={activeTab}
+          updateIdolRank={updateIdolRank}
         />
       )}
     </div>
