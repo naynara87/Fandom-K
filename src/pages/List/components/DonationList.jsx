@@ -30,15 +30,13 @@ function DonationsList() {
   const openDonationsModal = (donation) => {
     setSelectedDonation(donation);
     setShowDonationsModal(true);
-    console.log(localReceivedDonations);
   };
 
   useEffect(() => {
     if (selectedDonation) {
       setLocalReceivedDonations(selectedDonation.receivedDonations);
-      console.log(selectedDonation);
     }
-  }, [selectedDonation.id]); // selectedDonation이 있으면 바꿔줌 selectedDonation이 바뀔때마다
+  }, [selectedDonation.id, localReceivedDonations, selectedDonation]); // selectedDonation이 있으면 바꿔줌 selectedDonation이 바뀔때마다
 
   const openModal = (donation) => {
     if (localCredit <= 0) {
@@ -47,7 +45,7 @@ function DonationsList() {
     } else {
       openDonationsModal(donation);
 
-      console.log("선택된 후원:", selectedDonation);
+      console.log("모달 열림 선택된 후원:", selectedDonation); //여기서 반영이 안됨
       console.log("receivedDonation 값:", localReceivedDonations);
       console.log("테스트");
     }
@@ -56,9 +54,6 @@ function DonationsList() {
   const closeModal = () => {
     if (showDonationsModal) {
       setShowDonationsModal(false);
-
-      console.log(selectedDonation);
-      console.log("newReceivedDonations 값:", localReceivedDonations);
     }
     setShowLackOfCreditModal(false);
   };
