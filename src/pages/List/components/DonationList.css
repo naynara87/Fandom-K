@@ -65,11 +65,16 @@
           padding: 0.725em;
           border-radius: 3px;
           color: var(--white);
-          background: var(--brand-gradation);
           bottom: 1rem;
           left: 50%;
           transform: translate(-50%, 0);
           z-index: 1;
+        }
+        button.button_inactive {
+          background-color: #828282;
+        }
+        button.button_active {
+          background-color: var(--brand-gradation);
         }
       }
       .info {
