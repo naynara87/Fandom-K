@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import Slider from "react-slick";
 
 import plusIcon from "../../assets/images/ic_plus.svg";
@@ -17,14 +17,17 @@ function AddFavoriteIdolList({ myFavoriteIdolList, setMyFavoriteIdolList }) {
   const idolChunks = useIdolChunks(idolData);
   const showArrow = useShowArrow();
   const { isSelected, handleSelectIdolButtonClick, handleAddIdolButtonClick } =
-    useManageIdols(myFavoriteIdolList, setMyFavoriteIdolList);
+    useManageIdols(idolData, myFavoriteIdolList, setMyFavoriteIdolList);
 
-  const sliderSettings = {
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    infinite: false,
-    arrows: showArrow,
-  };
+  const sliderSettings = useMemo(
+    () => ({
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      infinite: false,
+      arrows: showArrow,
+    }),
+    []
+  );
 
   if (isLoading) {
     return (

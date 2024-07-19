@@ -65,9 +65,8 @@
   margin-top: 6px;
 }
 
-/* input */
-input[type='number']::-webkit-outer-spin-button,
-input[type='number']::-webkit-inner-spin-button {
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
@@ -105,11 +104,11 @@ input[type='number']::-webkit-inner-spin-button {
   margin-top: 6px;
 }
 
-/* button */
 .icon-btn-close {
   width: 24px;
   height: 24px;
-  background: url(../../../../assets/images/btn_close.png) no-repeat center center;
+  background: url(../../../../assets/images/btn_close.png) no-repeat center
+    center;
   background-size: cover;
   display: block;
 }

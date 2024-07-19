@@ -3,10 +3,12 @@ import React, { useState, useEffect, useContext } from "react";
 import donationCredit from "../../../../assets/images/ico_credit_non_gradation.png";
 
 import "./DonationsModal.css";
-import CloseButton from "./CloseButton";
 import useEscapeModal from "../../../../hooks/useEscapeModal";
+import putDonations from "../../../../service/putApi";
+import handleBackgroundClick from "../../../../utils/handleBackgroundClick";
+
 import { CreditContext } from "../../../../components/CreditContextProvider";
-import sendPutRequest from "../../../../service/receivedDonationApi";
+import CloseButton from "./CloseButton";
 
 function DonationsModal({
   profilePicture,
@@ -23,12 +25,13 @@ function DonationsModal({
     localCredit,
     selectedDonation,
   } = useContext(CreditContext);
+
   const [value, setValue] = useState("");
   const [buttonType, setButtonType] = useState("inactive");
   const [errorMessage, setErrorMessage] = useState("");
   const [myCredit, setMyCredit] = useState(localCredit);
   const [receivedDonations, setReceivedDonations] = useState(
-    localReceivedDonations,
+    localReceivedDonations
   );
   const [isDonationValid, setIsDonationValid] = useState(false);
 
@@ -37,7 +40,6 @@ function DonationsModal({
     setReceivedDonations(localReceivedDonations);
   }, [localCredit, localReceivedDonations]);
 
-  // input 값에 따라 업로드
   const handleInputChange = (e) => {
     const inputValue = e.target.value.trim();
     setValue(inputValue);
@@ -47,10 +49,9 @@ function DonationsModal({
       setErrorMessage("");
       setIsDonationValid(false);
     } else {
-      const numericValue = parseInt(inputValue);
+      const numericValue = parseInt(inputValue, 10);
 
       if (numericValue > myCredit) {
-        // 후원 금액이 보유 크레딧을 초과하는 경우
         setButtonType("inactive");
         setErrorMessage("갖고 있는 크레딧보다 더 많이 후원할 수 없어요");
         setIsDonationValid(false);
@@ -58,12 +59,10 @@ function DonationsModal({
         selectedDonation.receivedDonations + numericValue >
         selectedDonation.targetDonation
       ) {
-        // 후원 금액이 목표 금액을 초과하는 경우
         setButtonType("inactive");
         setErrorMessage("후원 금액이 목표 금액을 초과합니다");
         setIsDonationValid(false);
       } else {
-        // 유효한 입력값인 경우
         setButtonType("active");
         setErrorMessage("");
         setIsDonationValid(true);
@@ -71,7 +70,6 @@ function DonationsModal({
     }
   };
 
-  // 클릭하면 조공완료, localstorage 크레딧 줄어든다.//receiveDonation 충전된다.
   const onClickDonations = async () => {
     if (selectedDonation) {
       try {
@@ -84,7 +82,7 @@ function DonationsModal({
         const newReceivedDonations = receivedDonations + value;
 
         await handleReceivedDonationsUpdate(newReceivedDonations);
-        sendPutRequest(selectedDonation, value);
+        putDonations(selectedDonation, value);
         setReceivedDonations(newReceivedDonations);
       } catch (error) {
         console.error("Failed to donate:", error);
@@ -94,18 +92,15 @@ function DonationsModal({
     }
   };
 
-  const handleBackgroundClick = (e) => {
-    if (e.target === e.currentTarget) {
-      closeModal();
-    }
-  };
-
   useEscapeModal();
 
   if (!isOpen) return null;
 
   return (
-    <div className="donation-background" onClick={handleBackgroundClick}>
+    <div
+      className="donation-background"
+      onClick={(e) => handleBackgroundClick(e, closeModal)}
+    >
       <div
         className="donation-modal"
         style={{ height: errorMessage ? "529px" : "509px" }}

@@ -1,24 +1,20 @@
 import React from "react";
 
 import credit from "../../../../assets/images/ico_credit_gradation.png";
-
 import "./LackOfCreditModal.css";
+
+import handleBackgroundClick from "../../../../utils/handleBackgroundClick";
+
 import CloseButton from "../DonationsModal/CloseButton";
 import useEscapeModal from "../../../../hooks/useEscapeModal";
 
 function LackOfCreditModal({ closeModal }) {
   useEscapeModal(closeModal);
 
-  const handleBackgroundClick = (e) => {
-    if (e.target === e.currentTarget) {
-      closeModal();
-    }
-  };
-
   return (
     <div
       className="lack-of-credit-modal-background"
-      onClick={handleBackgroundClick}
+      onClick={(e) => handleBackgroundClick(e, closeModal)}
     >
       <div className="lack-of-credit-modal">
         <div>
