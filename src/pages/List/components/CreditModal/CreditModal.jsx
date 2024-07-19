@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react';
 
-import './CreditModal.css';
-import CreditIcon from '../../../../assets/images/ico_credit.png';
-import CreditWhiteIcon from '../../../../assets/images/ico_credit.svg';
-import { CreditContext } from '../../../../components/CreditContextProvider';
+import "./CreditModal.css";
+import CreditIcon from "../../../../assets/images/ico_credit_gradation.png";
+import CreditWhiteIcon from "../../../../assets/images/ico_credit_white.svg";
+import { CreditContext } from "../../../../components/CreditContextProvider";
 
 function CreditModal({ onClose }) {
   const { handleRecharge } = useContext(CreditContext);
