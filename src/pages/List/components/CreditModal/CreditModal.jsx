@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import React, { useState, useContext } from 'react';
 
 import "./CreditModal.css";
 import CreditIcon from "../../../../assets/images/ico_credit_gradation.png";

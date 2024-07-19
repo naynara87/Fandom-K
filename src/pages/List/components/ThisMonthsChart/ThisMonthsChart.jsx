@@ -1,19 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./ThisMonthsChart.css";
 import IdolDetail from "../IdolDetail";
 import ChartVoteModal from "../ChartVoteModal/ChartVoteModal";
 import useIdolChart from "../../../../hooks/useIdolChart";
+import LoadingBar from "../../../../components/Loadingbar";
+import { CreditContext } from "../../../../components/CreditContextProvider";
+import LackOfCreditModal from "../LackOfCreditModal/LackOfCreditModal";
 
 const getPageSize = () => {
   const width = window.innerWidth;
   if (width < 1200) {
     return 5;
-  } else {
-    return 10;
   }
+  return 10;
 };
 
 function ThisMonthsChart() {
+  const { localCredit } = useContext(CreditContext);
+
   const [activeTab, setActiveTab] = useState("female");
   const [pageSize, setPageSize] = useState(getPageSize());
   const { idolRank, loading, fetchError, fetchData } = useIdolChart(
@@ -22,6 +26,7 @@ function ThisMonthsChart() {
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [displayCount, setDisplayCount] = useState(pageSize);
+  const [showLackOfCreditModal, setShowLackOfCreditModal] = useState(false); // 추가된 부분
 
   useEffect(() => {
     const handleResize = () => {
@@ -36,18 +41,26 @@ function ThisMonthsChart() {
     };
   }, []);
 
-  const openGenderVoteModal = () => {
-    setIsModalOpen(true);
+  const openModal = () => {
+    if (localCredit < 1000) {
+      setShowLackOfCreditModal(true);
+    } else {
+      setIsModalOpen(true);
+    }
+  };
+
+  const updateIdolRank = () => {
+    fetchData(true);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
+    setShowLackOfCreditModal(false);
   };
 
   const tab = (gender) => {
     setActiveTab(gender);
-    setDisplayCount(pageSize); // 탭 변경 시 초기 표시 수로 리셋
-    fetchData(gender, pageSize); // 새로운 데이터 가져오기
+    setDisplayCount(pageSize);
   };
 
   const loadMore = () => {
@@ -62,7 +75,7 @@ function ThisMonthsChart() {
           type="button"
           aria-label="차트 투표하기"
           className="btn-modal-open"
-          onClick={openGenderVoteModal}
+          onClick={openModal}
         >
           <i className="icon-chart" />
           차트 투표하기
@@ -84,9 +97,14 @@ function ThisMonthsChart() {
           이달의 남자 아이돌
         </button>
       </div>
+
+      {loading && (
+        <div className="chart-wrap">
+          <LoadingBar />
+        </div>
+      )}
+      {fetchError && <div>Error loading data</div>}
       <ul className="ranking-list">
-        {loading && <div>Loading...</div>}
-        {fetchError && <div>Error loading data</div>}
         {!loading &&
           !fetchError &&
           idolRank
@@ -108,8 +126,10 @@ function ThisMonthsChart() {
           closeModal={closeModal}
           idolRank={idolRank}
           gender={activeTab}
+          updateIdolRank={updateIdolRank}
         />
       )}
+      {showLackOfCreditModal && <LackOfCreditModal closeModal={closeModal} />}
     </div>
   );
 }

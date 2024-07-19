@@ -1,30 +1,42 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./ChartVoteModal.css";
 import IdolDetail from "../IdolDetail";
+import postVotes from "../../../../service/postApi";
+import { CreditContext } from "../../../../components/CreditContextProvider";
 
-function ChartVoteModal({ onClose, idolRank, gender }) {
-  const initialSelectedState = idolRank.reduce((acc, idol) => {
-    acc[idol.id] = false;
-    return acc;
-  }, {});
+function ChartVoteModal({ closeModal, idolRank, gender, updateIdolRank }) {
+  const { handleCreditUpdate, localCredit } = useContext(CreditContext);
+  const [selectedIdolId, setSelectedIdolId] = useState(null);
+  const [myCredit, setMyCredit] = useState(localCredit);
 
-  const [selectedIdols, setSelectedIdols] = useState(initialSelectedState);
+  useEffect(() => {
+    setMyCredit(localCredit);
+
+    if (idolRank.length > 0) {
+      setSelectedIdolId(idolRank[0].id);
+    }
+  }, [idolRank, gender]);
 
   const handleIdolRadioClick = (idolId) => {
-    const newSelectedState = Object.keys(selectedIdols).reduce((acc, key) => {
-      acc[key] = key === idolId;
-      return acc;
-    }, {});
-
-    setSelectedIdols(newSelectedState);
+    setSelectedIdolId(idolId);
   };
 
-  const handleVoteButtonClick = (prevTotalVotes) => {
-    const updatedTotalVotes = prevTotalVotes + 1000;
+  const handleVoteButtonClick = async () => {
+    if (selectedIdolId) {
+      try {
+        await postVotes(selectedIdolId); // Call handleVote with selected idolId
+        console.log(`Successfully voted for idol with id: ${selectedIdolId}`);
+        updateIdolRank();
 
-    // **********totalVotes 업데이트**********
-
-    setIsSelected({});
+        const newCredit = myCredit - 1000;
+        handleCreditUpdate(newCredit);
+        setMyCredit(newCredit);
+      } catch (error) {
+        console.error("Failed to vote:", error);
+      } finally {
+        closeModal();
+      }
+    }
   };
 
   return (
@@ -32,22 +44,24 @@ function ChartVoteModal({ onClose, idolRank, gender }) {
       <div className="chart-modal">
         <div className="modal-header">
           <h2>이달의 {gender === "female" ? "여자" : "남자"} 아이돌</h2>
-          <button className="close-btn" onClick={onClose}>
-            X
+          <button
+            className="close-btn"
+            onClick={closeModal}
+            aria-label="모달 닫기 버튼"
+          >
+            <i className="icon-btn-close" />
           </button>
         </div>
         <div className="modal-content">
-          <div className="ranking-list">
-            {idolRank.map((idol) => (
-              <IdolDetail
-                key={idol.id}
-                idolData={idol}
-                isNeedRadio={true}
-                isSelected={selectedIdols[idol.id]}
-                onRadioChange={() => handleIdolRadioClick(idol.id)}
-              />
-            ))}
-          </div>
+          {idolRank.map((idol) => (
+            <IdolDetail
+              key={idol.id}
+              idolData={idol}
+              isNeedRadio
+              isSelected={selectedIdolId === idol.id}
+              onRadioChange={() => handleIdolRadioClick(idol.id)}
+            />
+          ))}
         </div>
         <div className="modal-footer">
           <button className="modal-vote-btn" onClick={handleVoteButtonClick}>

@@ -5,7 +5,7 @@ export const CreditContext = React.createContext();
 function CreditContextProvider({ children }) {
   const initialCredit = () => {
     const storedCredit = JSON.parse(localStorage.getItem("myCredit"));
-    return storedCredit ? storedCredit : 0;
+    return storedCredit || 0;
   };
 
   const [selectedDonation, setSelectedDonation] = useState({});
@@ -20,12 +20,7 @@ function CreditContextProvider({ children }) {
 
   const handleReceivedDonationsUpdate = (newReceivedDonations) => {
     setLocalReceivedDonations(newReceivedDonations);
-    //객체의 속성 업데이트
-    setSelectedDonation((prevSelectedDonation) => ({
-      ...prevSelectedDonation,
-      receivedDonations: newReceivedDonations,
-    }));
-    localStorage.setItem("selectedDonation", JSON.stringify(selectedDonation));
+    // sendPutRequest(selectedDonation);
   };
 
   const handleRecharge = (amount) => {
@@ -49,11 +44,9 @@ function CreditContextProvider({ children }) {
   }, [localCredit, localReceivedDonations, selectedDonation, isModalOpen]);
 
   return (
-    <>
-      <CreditContext.Provider value={contextValue}>
-        {children}
-      </CreditContext.Provider>
-    </>
+    <CreditContext.Provider value={contextValue}>
+      {children}
+    </CreditContext.Provider>
   );
 }
 

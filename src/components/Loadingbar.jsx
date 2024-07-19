@@ -1,7 +1,7 @@
-import React from 'react';
-import './Loadingbar.css';
+import React from "react";
+import "./Loadingbar.css";
 
-function Loadingbar() {
+function LoadingBar() {
   return (
     <div className="spinner-container">
       <div className="spinner" />
@@ -9,4 +9,4 @@ function Loadingbar() {
   );
 }
 
-export default Loadingbar;
+export default LoadingBar;
