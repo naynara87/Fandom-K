@@ -5,6 +5,7 @@ import donationCredit from "../../../../assets/images/ico_credit_non_gradation.p
 import "./DonationsModal.css";
 import useEscapeModal from "../../../../hooks/useEscapeModal";
 import putDonations from "../../../../service/putApi";
+import handleBackgroundClick from "../../../../utils/handleBackgroundClick";
 
 import { CreditContext } from "../../../../components/CreditContextProvider";
 import CloseButton from "./CloseButton";
@@ -24,6 +25,7 @@ function DonationsModal({
     localCredit,
     selectedDonation,
   } = useContext(CreditContext);
+
   const [value, setValue] = useState("");
   const [buttonType, setButtonType] = useState("inactive");
   const [errorMessage, setErrorMessage] = useState("");
@@ -90,18 +92,15 @@ function DonationsModal({
     }
   };
 
-  const handleBackgroundClick = (e) => {
-    if (e.target === e.currentTarget) {
-      closeModal();
-    }
-  };
-
   useEscapeModal();
 
   if (!isOpen) return null;
 
   return (
-    <div className="donation-background" onClick={handleBackgroundClick}>
+    <div
+      className="donation-background"
+      onClick={(e) => handleBackgroundClick(e, closeModal)}
+    >
       <div
         className="donation-modal"
         style={{ height: errorMessage ? "529px" : "509px" }}
