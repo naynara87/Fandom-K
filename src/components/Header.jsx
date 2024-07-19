@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 import logo from "../assets/images/logo_pandom_k.svg"; // 로고 이미지 경로
-import profile from "../assets/images/header-profile.png"; // 프로필 이미지 경로
+import profile from "../assets/images/img_header_profile.png"; // 프로필 이미지 경로
 import "./Header.css";
 
 
