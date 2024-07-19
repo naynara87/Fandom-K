@@ -24,7 +24,7 @@ function CreditContextProvider({ children }) {
           // 필요한 경우 인증 토큰 등의 헤더도 추가할 수 있습니다.
         },
         body: JSON.stringify({ amount: `${localReceivedDonations}` }),
-      }
+      },
     )
       .then((response) => response.json())
       .then((data) => {
