@@ -1,9 +1,6 @@
 import React, { useState, useContext } from "react";
 
 import "./CreditModal.css";
-import CreditIcon from "../../../../assets/images/ico_credit_gradation.png";
-import CreditWhiteIcon from "../../../../assets/images/ico_credit_white.svg";
-
 import { CreditContext } from "../../../../components/CreditContextProvider";
 
 function CreditModal({ onClose }) {
@@ -14,11 +11,16 @@ function CreditModal({ onClose }) {
 
   return (
     <div className="modal-overlay">
-      <div className="modal">
+      <div className="modal modal-credit-recharge">
         <div className="modal-header">
-          <h2>크레딧 충전하기</h2>
-          <button className="close-btn" onClick={onClose}>
-            <i className="button-close" aria-label="삭제 이미지" />
+          <h4 className="title">크레딧 충전하기</h4>
+          <button
+            type="button"
+            className="btn-close"
+            onClick={onClose}
+            aria-label="삭제 버튼"
+          >
+            <i className="btn-close" />
           </button>
         </div>
         <div className="modal-content">
@@ -29,7 +31,7 @@ function CreditModal({ onClose }) {
               htmlFor={`credit-${credit}`}
             >
               <div className="radio-credit-wrapper">
-                <img src={CreditIcon} alt="Credit Icon" />
+                <i className="icon-md icon-credit" />
                 {credit}
               </div>
               <input
@@ -43,8 +45,13 @@ function CreditModal({ onClose }) {
           ))}
         </div>
         <div className="modal-footer">
-          <button onClick={() => handleRecharge(selectedCredit)}>
-            <img src={CreditWhiteIcon} alt="Credit Icon" />
+          <button
+            type="button"
+            className="btn-primary"
+            onClick={() => handleRecharge(selectedCredit)}
+            aria-label="충전하기 버튼"
+          >
+            <i className="icon-md icon-credit-white" />
             충전하기
           </button>
         </div>

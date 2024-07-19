@@ -7,7 +7,6 @@ import mobile1 from "../../assets/images/img_sec01_mobile.png";
 import mobile2 from "../../assets/images/img_sec02_mobile.png";
 import mobile3 from "../../assets/images/img_sec03_mobile.png";
 import "./Landing.css";
-
 import useScrollAnimation from "../../hooks/useScrollAnimation";
 
 function Landing() {
@@ -26,7 +25,7 @@ function Landing() {
         </title>
       </Helmet>
       <main>
-        <section className="section sec01">
+        <section className="main-section sec01">
           <div className="section-wrap">
             <h2 className="main-title animate">
               내가 좋아하는 아이돌을
@@ -47,7 +46,7 @@ function Landing() {
             </Link>
           </div>
         </section>
-        <section className="section sec02">
+        <section className="main-section sec02">
           <div className="section-wrap">
             <p className="section-sub-title animate up">후원하기</p>
             <h2 className="section-title animate up">
@@ -62,7 +61,7 @@ function Landing() {
             />
           </div>
         </section>
-        <section className="section sec03">
+        <section className="main-section sec03">
           <div className="section-wrap">
             <p className="section-sub-title animate up">이달의 아티스트</p>
             <h2 className="section-title animate up">
@@ -77,7 +76,7 @@ function Landing() {
             />
           </div>
         </section>
-        <section className="section sec04">
+        <section className="main-section sec04">
           <div className="section-wrap">
             <p className="section-sub-title animate up">나만의 아티스트</p>
             <h2 className="section-title animate up">
