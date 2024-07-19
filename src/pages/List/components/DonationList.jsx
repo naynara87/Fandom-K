@@ -21,7 +21,7 @@ function DonationsList() {
     localReceivedDonations,
     setLocalReceivedDonations,
   } = useContext(CreditContext);
-  const { donations, loading } = useDonationList();
+  const { donations, loading, fetchData } = useDonationList();
   const [showDonationsModal, setShowDonationsModal] = useState(false);
   const [showLackOfCreditModal, setShowLackOfCreditModal] = useState(false);
 
@@ -36,19 +36,26 @@ function DonationsList() {
     if (selectedDonation) {
       setLocalReceivedDonations(selectedDonation.receivedDonations);
     }
+    console.log("값:", selectedDonation);
   }, [selectedDonation.id, localReceivedDonations, selectedDonation]); // selectedDonation이 있으면 바꿔줌 selectedDonation이 바뀔때마다
 
   const openModal = (donation) => {
     if (localCredit <= 0) {
       openLackOfCreditModal();
       console.log("크레딧 없음");
+    } else if (donation.receivedDonations >= donation.targetDonation) {
+      console.log("목표 후원이 이미 달성되었습니다.");
     } else {
       openDonationsModal(donation);
 
-      console.log("모달 열림 선택된 후원:", selectedDonation); //여기서 반영이 안됨
+      console.log("모달 열림 선택된 후원:", selectedDonation);
       console.log("receivedDonation 값:", localReceivedDonations);
       console.log("테스트");
     }
+  };
+
+  const updateProgressbar = () => {
+    fetchData(true);
   };
 
   const closeModal = () => {
@@ -114,6 +121,9 @@ function DonationsList() {
                   onClick={() => {
                     openModal(donation);
                   }}
+                  disabled={
+                    donation.receivedDonations >= donation.targetDonation
+                  }
                 >
                   후원하기
                 </button>
@@ -151,6 +161,7 @@ function DonationsList() {
             title={selectedDonation.title}
             closeModal={closeModal}
             isOpen={showDonationsModal}
+            updateProgressbar={updateProgressbar}
           />
         )}
         {showLackOfCreditModal && <LackOfCreditModal closeModal={closeModal} />}

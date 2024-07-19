@@ -14,6 +14,7 @@ function DonationsModal({
   title,
   closeModal,
   isOpen,
+  updateProgressbar,
 }) {
   const {
     handleCreditUpdate,
@@ -27,7 +28,7 @@ function DonationsModal({
   const [errorMessage, setErrorMessage] = useState("");
   const [myCredit, setMyCredit] = useState(localCredit);
   const [receivedDonations, setReceivedDonations] = useState(
-    localReceivedDonations,
+    localReceivedDonations
   );
   const [isDonationValid, setIsDonationValid] = useState(false);
 
@@ -38,32 +39,56 @@ function DonationsModal({
     console.log("업데이트 된 localReceived 받은 값:", receivedDonations);
   }, [localCredit, localReceivedDonations]);
 
-  // 내 크레딧 값보다 적으면 활성화된다.
   // input 값에 따라 업로드
   const handleInputChange = (e) => {
-    const inputValue = parseInt(e.target.value, 10);
+    const inputValue = e.target.value.trim();
     setValue(inputValue);
 
-    const ValidDonation = myCredit >= inputValue;
-    if (ValidDonation) {
-      setbuttonType("active");
-      setErrorMessage("");
-      setIsDonationValid(true);
-    } else {
+    if (inputValue === "") {
       setbuttonType("inactive");
-      setErrorMessage("갖고 있는 크레딧보다 더 많이 후원할 수 없어요");
+      setErrorMessage("");
       setIsDonationValid(false);
+    } else {
+      const numericValue = parseInt(inputValue, 10);
+
+      if (isNaN(numericValue)) {
+        // 숫자가 아닌 경우
+        setbuttonType("inactive");
+        setErrorMessage("유효한 숫자를 입력하세요");
+        setIsDonationValid(false);
+      } else if (numericValue > myCredit) {
+        // 후원 금액이 보유 크레딧을 초과하는 경우
+        setbuttonType("inactive");
+        setErrorMessage("갖고 있는 크레딧보다 더 많이 후원할 수 없어요");
+        setIsDonationValid(false);
+      } else if (
+        selectedDonation.receivedDonations + numericValue >
+        selectedDonation.targetDonation
+      ) {
+        // 후원 금액이 목표 금액을 초과하는 경우
+        setbuttonType("inactive");
+        setErrorMessage("후원 금액이 목표 금액을 초과합니다");
+        setIsDonationValid(false);
+      } else {
+        // 유효한 입력값인 경우
+        setbuttonType("active");
+        setErrorMessage("");
+        setIsDonationValid(true);
+      }
     }
+
     console.log(receivedDonations); // localReceivedDonations 값
   };
 
-  // 클릭하면 조공완료, localstorage 크레딧 줄어든다.//receiveDonation 충전된다.
+  //클릭하면 조공완료, localstorage 크레딧 줄어든다.//receiveDonation 충전된다.
   const onClickDonations = async () => {
     if (selectedDonation) {
       try {
         const newCredit = myCredit - value;
         handleCreditUpdate(newCredit);
         setMyCredit(newCredit);
+
+        updateProgressbar();
 
         const newReceivedDonations = receivedDonations + value;
 
@@ -78,15 +103,6 @@ function DonationsModal({
       }
     }
   };
-
-  // setTimeout(() => {
-  //   handleReceivedDonationsUpdate(newReceivedDonations);
-  // }, 500);
-
-  //   console.log(`${receivedDonations} + ${value}`);
-
-  //   closeModal();
-  // };
 
   const handleBackgroundClick = (e) => {
     if (e.target === e.currentTarget) {

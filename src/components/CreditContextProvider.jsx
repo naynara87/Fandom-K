@@ -20,7 +20,6 @@ function CreditContextProvider({ children }) {
 
   const handleReceivedDonationsUpdate = (newReceivedDonations) => {
     setLocalReceivedDonations(newReceivedDonations);
-    // sendPutRequest(selectedDonation);
   };
 
   const handleRecharge = (amount) => {
