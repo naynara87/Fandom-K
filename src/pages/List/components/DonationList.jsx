@@ -1,17 +1,17 @@
-import React, { useState, useMemo, useEffect, useContext } from 'react';
-import Slider from 'react-slick';
+import React, { useState, useMemo, useEffect, useContext } from "react";
+import Slider from "react-slick";
 
-import calculateTime from '../../../utils/deadline';
-import formatNumber from '../../../utils/formatNumber';
-import Loadingbar from '../../../components/Loadingbar';
+import calculateTime from "../../../utils/deadline";
+import formatNumber from "../../../utils/formatNumber";
+import Loadingbar from "../../../components/Loadingbar";
 
-import './DonationList.css';
+import "./DonationList.css";
 
-import useDonationList from '../../../hooks/useDonationList';
-import DonationsModal from './DonationsModal/DonationsModal';
-import LackOfCreditModal from './LackOfCreditModal/LackOfCreditModal';
+import useDonationList from "../../../hooks/useDonationList";
+import DonationsModal from "./DonationsModal/DonationsModal";
+import LackOfCreditModal from "./LackOfCreditModal/LackOfCreditModal";
 
-import { CreditContext } from '../../../components/CreditContextProvider';
+import { CreditContext } from "../../../components/CreditContextProvider";
 
 function DonationsList() {
   const {
@@ -43,13 +43,13 @@ function DonationsList() {
   const openModal = (donation) => {
     if (localCredit <= 0) {
       openLackOfCreditModal();
-      console.log('크레딧 없음');
+      console.log("크레딧 없음");
     } else {
       openDonationsModal(donation);
 
-      console.log('선택된 후원:', selectedDonation);
-      console.log('receivedDonation 값:', localReceivedDonations);
-      console.log('테스트');
+      console.log("선택된 후원:", selectedDonation);
+      console.log("receivedDonation 값:", localReceivedDonations);
+      console.log("테스트");
     }
   };
 
@@ -58,7 +58,7 @@ function DonationsList() {
       setShowDonationsModal(false);
 
       console.log(selectedDonation);
-      console.log('newReceivedDonations 값:', localReceivedDonations);
+      console.log("newReceivedDonations 값:", localReceivedDonations);
     }
     setShowLackOfCreditModal(false);
   };
@@ -85,7 +85,7 @@ function DonationsList() {
         },
       ],
     }),
-    [],
+    []
   );
 
   if (loading) {
@@ -100,67 +100,74 @@ function DonationsList() {
   }
 
   return (
-    <div className="donation">
-      <h3>후원을 기다리는 조공</h3>
-      <div className="donation-wrap slider-container">
-        <Slider
-          slidesToShow={sliderSettings.slidesToShow}
-          slidesToScroll={sliderSettings.slidesToScroll}
-          infinite={sliderSettings.infinite}
-          responsive={sliderSettings.responsive}
-          className="donation-list"
-        >
-          {donations.map((donation) => (
-            <div className="donation-card" key={donation.id}>
-              <div className="img-wrap">
-                <img src={donation.idol.profilePicture} alt={donation.title} />
-                <button
-                  type="button"
-                  onClick={() => {
-                    openModal(donation);
-                  }}
-                >
-                  후원하기
-                </button>
-              </div>
-              <div className="info">
-                <span className="place">{donation.subtitle}</span>
-                <h4 className="title">{donation.title}</h4>
-                <div className="progress">
-                  <div className="progress-info">
-                    <div className="credit">
-                      <i className="icon icon-credit" />
-                      {formatNumber(donation.targetDonation)}
+    <>
+      <div className="donation">
+        <h3>후원을 기다리는 조공</h3>
+        <div className="donation-wrap slider-container">
+          <Slider
+            slidesToShow={sliderSettings.slidesToShow}
+            slidesToScroll={sliderSettings.slidesToScroll}
+            infinite={sliderSettings.infinite}
+            responsive={sliderSettings.responsive}
+            className="donation-list"
+          >
+            {donations.map((donation) => (
+              <div className="donation-card" key={donation.id}>
+                <div className="img-wrap">
+                  <img
+                    src={donation.idol.profilePicture}
+                    alt={donation.title}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      openModal(donation);
+                    }}
+                  >
+                    후원하기
+                  </button>
+                </div>
+                <div className="info">
+                  <span className="place">{donation.subtitle}</span>
+                  <h4 className="title">{donation.title}</h4>
+                  <div className="progress">
+                    <div className="progress-info">
+                      <div className="credit">
+                        <i className="icon icon-credit" />
+                        {formatNumber(donation.targetDonation)}
+                      </div>
+                      <div className="deadline">
+                        {calculateTime(donation.deadline)}
+                      </div>
                     </div>
-                    <div className="deadline">
-                      {calculateTime(donation.deadline)}
+                    <div className="progress-bar">
+                      <div
+                        className="percent"
+                        style={{
+                          width: `${(donation.receivedDonations / donation.targetDonation) * 100}%`,
+                        }}
+                      />
                     </div>
-                  </div>
-                  <div className="progress-bar">
-                    <div
-                      className="percent"
-                      style={{
-                        width: `${(donation.receivedDonations / donation.targetDonation) * 100}%`,
-                      }}
-                    />
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </Slider>
-        {showDonationsModal && (
-          <DonationsModal
-            profilePicture={selectedDonation.idol.profilePicture}
-            subtitle={selectedDonation.subtitle}
-            title={selectedDonation.title}
-            closeModal={closeModal}
-            isOpen={showDonationsModal}
-          />
-        )}
-        {showLackOfCreditModal && <LackOfCreditModal closeModal={closeModal} />}
+            ))}
+          </Slider>
+          {showDonationsModal && (
+            <DonationsModal
+              profilePicture={selectedDonation.idol.profilePicture}
+              subtitle={selectedDonation.subtitle}
+              title={selectedDonation.title}
+              closeModal={closeModal}
+              isOpen={showDonationsModal}
+            />
+          )}
+          {showLackOfCreditModal && (
+            <LackOfCreditModal closeModal={closeModal} />
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
