@@ -43,10 +43,12 @@ function DonationsList() {
     if (localCredit <= 0) {
       openLackOfCreditModal();
       console.log("크레딧 없음");
+    } else if (donation.receivedDonations >= donation.targetDonation) {
+      console.log("목표 후원이 이미 달성되었습니다.");
     } else {
       openDonationsModal(donation);
 
-      console.log("모달 열림 선택된 후원:", selectedDonation); //여기서 반영이 안됨
+      console.log("모달 열림 선택된 후원:", selectedDonation);
       console.log("receivedDonation 값:", localReceivedDonations);
       console.log("테스트");
     }
@@ -119,6 +121,9 @@ function DonationsList() {
                   onClick={() => {
                     openModal(donation);
                   }}
+                  disabled={
+                    donation.receivedDonations >= donation.targetDonation
+                  }
                 >
                   후원하기
                 </button>
