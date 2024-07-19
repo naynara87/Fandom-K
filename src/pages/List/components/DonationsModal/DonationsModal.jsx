@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
-import donationCredit from "../../../../assets/images/donationCredit.png";
+
+import donationCredit from "../../../../assets/images/ico_credit_non_gradation.png";
+
 import "./DonationsModal.css";
 import CloseButton from "./CloseButton";
 import useEscapeModal from "../../../../hooks/useEscapeModal";
@@ -26,7 +28,7 @@ function DonationsModal({
   const [errorMessage, setErrorMessage] = useState("");
   const [myCredit, setMyCredit] = useState(localCredit);
   const [receivedDonations, setReceivedDonations] = useState(
-    localReceivedDonations
+    localReceivedDonations,
   );
   const [isDonationValid, setIsDonationValid] = useState(false);
 
@@ -69,7 +71,7 @@ function DonationsModal({
     }
   };
 
-  //클릭하면 조공완료, localstorage 크레딧 줄어든다.//receiveDonation 충전된다.
+  // 클릭하면 조공완료, localstorage 크레딧 줄어든다.//receiveDonation 충전된다.
   const onClickDonations = async () => {
     if (selectedDonation) {
       try {
@@ -80,6 +82,7 @@ function DonationsModal({
         updateProgressbar();
 
         const newReceivedDonations = receivedDonations + value;
+
         await handleReceivedDonationsUpdate(newReceivedDonations);
         sendPutRequest(selectedDonation, value);
         setReceivedDonations(newReceivedDonations);

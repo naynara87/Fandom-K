@@ -1,16 +1,16 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from "react";
 
-import './MyCredit.css';
-import CreditIcon from '../../../../assets/images/donationCredit.png';
-import { CreditContext } from '../../../../components/CreditContextProvider';
-import CreditModal from '../CreditModal/CreditModal';
+import "./MyCredit.css";
+import CreditIcon from "../../../../assets/images/ico_credit_gradation.png";
+import { CreditContext } from "../../../../components/CreditContextProvider";
+import CreditModal from "../CreditModal/CreditModal";
 
 function MyCredit() {
   const { localCredit, isModalOpen, setIsModalOpen } =
     useContext(CreditContext);
 
   useEffect(() => {
-    localStorage.setItem('myCredit', JSON.stringify(localCredit));
+    localStorage.setItem("myCredit", JSON.stringify(localCredit));
   }, [localCredit]);
 
   return (
