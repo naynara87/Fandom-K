@@ -1,19 +1,19 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
-import logo from '../assets/images/logo.svg'; // 로고 이미지 경로
-import profile from '../assets/images/header-profile.png'; // 프로필 이미지 경로
-import './Header.css';
+import logo from "../assets/images/logo.svg"; // 로고 이미지 경로
+import profile from "../assets/images/header-profile.png"; // 프로필 이미지 경로
+import "./Header.css";
 
 function Header() {
   const navigate = useNavigate();
 
   const handleLogoClick = () => {
-    navigate('/list');
+    navigate("/list");
   };
 
   const handleProfileClick = () => {
-    navigate('/mypage'); // '/mypage'로 이동
+    navigate("/mypage");
   };
 
   return (
