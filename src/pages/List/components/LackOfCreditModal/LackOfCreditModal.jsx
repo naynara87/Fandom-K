@@ -1,7 +1,4 @@
 import React from "react";
-
-import credit from "../../../../assets/images/ico_credit_gradation.png";
-
 import "./LackOfCreditModal.css";
 import CloseButton from "../DonationsModal/CloseButton";
 import useEscapeModal from "../../../../hooks/useEscapeModal";
@@ -15,22 +12,35 @@ function LackOfCreditModal({ closeModal }) {
     }
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      closeModal();
+    }
+  };
+
   return (
     <div
-      className="lack-of-credit-modal-background"
+      className="modal-overlay"
       onClick={handleBackgroundClick}
+      onKeyDown={handleKeyDown}
+      role="button"
+      tabIndex={0}
     >
-      <div className="lack-of-credit-modal">
-        <div>
+      <div className="modal modal-lack-of-credit">
+        <div className="modal-header">
           <CloseButton onClick={closeModal} />
         </div>
-        <img className="credit" src={credit} alt="크레딧 이미지" />
-        <p className="lack-of-credit-modal-title">
-          앗! 투표하기 위한 <span>크레딧</span>이 부족해요
-        </p>
-        <button className="button button_active" onClick={closeModal}>
-          확인
-        </button>
+        <div className="modal-content">
+          <i className="icon-md icon-credit" />
+          <p className="title">
+            앗! 투표하기 위한 <span>크레딧</span>이 부족해요
+          </p>
+        </div>
+        <div className="modal-footer">
+          <button type="button" className="btn-primary" onClick={closeModal}>
+            확인
+          </button>
+        </div>
       </div>
     </div>
   );
