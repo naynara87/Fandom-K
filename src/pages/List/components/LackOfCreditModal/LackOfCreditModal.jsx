@@ -1,30 +1,18 @@
 import React from "react";
 import "./LackOfCreditModal.css";
+
+import handleBackgroundClick from "../../../../utils/handleBackgroundClick";
+
 import CloseButton from "../DonationsModal/CloseButton";
 import useEscapeModal from "../../../../hooks/useEscapeModal";
 
 function LackOfCreditModal({ closeModal }) {
   useEscapeModal(closeModal);
 
-  const handleBackgroundClick = (e) => {
-    if (e.target === e.currentTarget) {
-      closeModal();
-    }
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      closeModal();
-    }
-  };
-
   return (
     <div
       className="modal-overlay"
-      onClick={handleBackgroundClick}
-      onKeyDown={handleKeyDown}
-      role="button"
-      tabIndex={0}
+      onClick={(e) => handleBackgroundClick(e, closeModal)}
     >
       <div className="modal modal-lack-of-credit">
         <div className="modal-header">

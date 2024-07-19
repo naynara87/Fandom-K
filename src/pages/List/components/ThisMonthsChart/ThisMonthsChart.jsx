@@ -1,70 +1,30 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
+
 import "./ThisMonthsChart.css";
+
+import { CreditContext } from "../../../../components/CreditContextProvider";
+import useIdolData from "../../../../hooks/useIdolData";
+import useChartFunc from "../../../../hooks/useChartFunc";
+
 import IdolDetail from "../IdolDetail";
 import ChartVoteModal from "../ChartVoteModal/ChartVoteModal";
-import useIdolData from "../../../../hooks/useIdolData";
 import LoadingBar from "../../../../components/Loadingbar";
-import { CreditContext } from "../../../../components/CreditContextProvider";
 import LackOfCreditModal from "../LackOfCreditModal/LackOfCreditModal";
-
-const getPageSize = () => {
-  const width = window.innerWidth;
-  if (width < 1200) {
-    return 5;
-  }
-  return 10;
-};
 
 function ThisMonthsChart() {
   const { localCredit } = useContext(CreditContext);
-
-  const [activeTab, setActiveTab] = useState("female");
-  const [pageSize, setPageSize] = useState(getPageSize());
-  const { idolData, isLoading, fetchError, fetchIdolsData } =
-    useIdolData(activeTab);
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [displayCount, setDisplayCount] = useState(pageSize);
-  const [showLackOfCreditModal, setShowLackOfCreditModal] = useState(false); // 추가된 부분
-
-  useEffect(() => {
-    const handleResize = () => {
-      const newPageSize = getPageSize();
-      setPageSize(newPageSize);
-      setDisplayCount(newPageSize);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  const openModal = () => {
-    if (localCredit < 1000) {
-      setShowLackOfCreditModal(true);
-    } else {
-      setIsModalOpen(true);
-    }
-  };
-
-  const updateIdolRank = () => {
-    fetchIdolsData(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setShowLackOfCreditModal(false);
-  };
-
-  const tab = (gender) => {
-    setActiveTab(gender);
-    setDisplayCount(pageSize);
-  };
-
-  const loadMore = () => {
-    setDisplayCount((prevCount) => prevCount + pageSize);
-  };
+  const {
+    isModalOpen,
+    showLackOfCreditModal,
+    activeTab,
+    displayCount,
+    tab,
+    openModal,
+    closeModal,
+    updateIdolRank,
+    loadMore,
+  } = useChartFunc(localCredit);
+  const { idolData, isLoading, fetchError } = useIdolData(activeTab);
 
   return (
     <section className="section chart">

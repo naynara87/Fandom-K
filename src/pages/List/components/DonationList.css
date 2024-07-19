@@ -58,6 +58,12 @@
           transform: translate(-50%, 0);
           z-index: 1;
         }
+        button.button_inactive {
+          background-color: #828282;
+        }
+        button.button_active {
+          background-color: var(--brand-gradation);
+        }
       }
       .info {
         padding: 10px 0;
