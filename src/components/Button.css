@@ -62,7 +62,8 @@
 }
 .btn-more {
   text-align: center;
-  width: 326px;
+  width: calc(100% - 48px);
+  max-width: 326px;
   padding: 0.725em 1.3em;
   border: 1px solid rgba(241, 238, 249, 0.8);
   background-color: rgba(255, 255, 255, 0.1);

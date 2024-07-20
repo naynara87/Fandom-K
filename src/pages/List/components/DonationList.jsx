@@ -1,42 +1,32 @@
-import React, { useMemo, useContext } from "react";
-import Slider from "react-slick";
+import React, { useMemo, useContext } from 'react';
+import Slider from 'react-slick';
 
-import "./DonationList.css";
+import './DonationList.css';
 
-import calculateTime from "../../../utils/calculateTime";
-import formatNumber from "../../../utils/formatNumber";
-import useDonationList from "../../../hooks/useDonationList";
-import useDonationFunc from "../../../hooks/useDonationFunc";
+import calculateTime from '../../../utils/calculateTime';
+import formatNumber from '../../../utils/formatNumber';
+import useDonationList from '../../../hooks/useDonationList';
+import useDonationFunc from '../../../hooks/useDonationFunc';
 
-import LoadingBar from "../../../components/Loadingbar";
-import { CreditContext } from "../../../components/CreditContextProvider";
-import DonationsModal from "./DonationsModal/DonationsModal";
-import LackOfCreditModal from "./LackOfCreditModal/LackOfCreditModal";
+import LoadingBar from '../../../components/Loadingbar';
+import { CreditContext } from '../../../components/CreditContextProvider';
+import DonationsModal from './DonationsModal/DonationsModal';
+import LackOfCreditModal from './LackOfCreditModal/LackOfCreditModal';
 
 function DonationsList() {
-  const {
-    selectedDonation,
-    setSelectedDonation,
-    localCredit,
-    setLocalReceivedDonations,
-  } = useContext(CreditContext);
+  const { selectedDonation, setSelectedDonation, localCredit, setLocalReceivedDonations } = useContext(CreditContext);
 
   const { donations, loading, fetchData } = useDonationList();
 
-  const {
-    showDonationsModal,
-    showLackOfCreditModal,
-    openModal,
-    closeModal,
-    updateProgressbar,
-  } = useDonationFunc(
+  const { showDonationsModal, showLackOfCreditModal, openModal, closeModal } = useDonationFunc(
     selectedDonation,
     setSelectedDonation,
     localCredit,
     setLocalReceivedDonations,
-    fetchData,
   );
-
+  const updateProgressbar = () => {
+    fetchData(true);
+  };
   const sliderSettings = useMemo(
     () => ({
       slidesToShow: 4,
@@ -99,9 +89,7 @@ function DonationsList() {
                   onClick={() => {
                     openModal(donation);
                   }}
-                  disabled={
-                    donation.receivedDonations >= donation.targetDonation
-                  }
+                  disabled={donation.receivedDonations >= donation.targetDonation}
                 >
                   후원하기
                 </button>
@@ -115,9 +103,7 @@ function DonationsList() {
                       <i className="icon-sm icon-credit" />
                       {formatNumber(donation.targetDonation)}
                     </div>
-                    <div className="deadline">
-                      {calculateTime(donation.deadline)}
-                    </div>
+                    <div className="deadline">{calculateTime(donation.deadline)}</div>
                   </div>
                   <div className="progress-bar">
                     <div
