@@ -10,29 +10,11 @@ import handleBackgroundClick from "../../../../utils/handleBackgroundClick";
 import { CreditContext } from "../../../../components/CreditContextProvider";
 import CloseButton from "./CloseButton";
 
-function DonationsModal({
-  profilePicture,
-  subtitle,
-  title,
-  closeModal,
-  isOpen,
-  updateProgressbar,
-}) {
-  const {
-    handleCreditUpdate,
-    handleReceivedDonationsUpdate,
-    localReceivedDonations,
-    localCredit,
-    selectedDonation,
-  } = useContext(CreditContext);
+function DonationsModal({ profilePicture, subtitle, title, closeModal, isOpen, updateProgressbar }) {
+  const { handleCreditUpdate, handleReceivedDonationsUpdate, localReceivedDonations, localCredit, selectedDonation } =
+    useContext(CreditContext);
 
-  const {
-    value,
-    errorMessage,
-    isDonationValid,
-    handleInputChange,
-    onClickDonations,
-  } = useDonationHandler(
+  const { value, errorMessage, isDonationValid, handleInputChange, onClickDonations } = useDonationHandler(
     handleCreditUpdate,
     handleReceivedDonationsUpdate,
     localReceivedDonations,
@@ -47,10 +29,7 @@ function DonationsModal({
   if (!isOpen) return null;
 
   return (
-    <div
-      className="modal-overlay"
-      onClick={(e) => handleBackgroundClick(e, closeModal)}
-    >
+    <div className="modal-overlay" onClick={(e) => handleBackgroundClick(e, closeModal)}>
       <div className="modal modal-donation">
         <div className="modal-header">
           <h4 className="title">후원하기</h4>
@@ -58,11 +37,7 @@ function DonationsModal({
         </div>
         <div className="modal-content">
           <div className="idol-info">
-            <img
-              className="profile-picture"
-              src={profilePicture}
-              alt="아이돌 이미지"
-            />
+            <img className="profile-picture" src={profilePicture} alt="아이돌 이미지" />
             <div className="subtitle">{subtitle}</div>
             <div className="title">{title}</div>
           </div>
@@ -77,9 +52,7 @@ function DonationsModal({
             />
             <img src={donationCredit} alt="크레딧 이미지" />
           </div>
-          {errorMessage && (
-            <p className="donation-input-error">{errorMessage}</p>
-          )}
+          {errorMessage && <p className="donation-input-error">{errorMessage}</p>}
         </div>
         <div className="modal-footer">
           <button

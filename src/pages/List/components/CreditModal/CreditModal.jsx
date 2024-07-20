@@ -14,12 +14,7 @@ function CreditModal({ onClose }) {
       <div className="modal modal-credit-recharge">
         <div className="modal-header">
           <h4 className="title">크레딧 충전하기</h4>
-          <button
-            type="button"
-            className="btn-close"
-            onClick={onClose}
-            aria-label="삭제 버튼"
-          >
+          <button type="button" className="btn-close" onClick={onClose} aria-label="삭제 버튼">
             <i className="btn-close" />
           </button>
         </div>
