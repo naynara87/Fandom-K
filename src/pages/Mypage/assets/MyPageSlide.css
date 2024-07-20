@@ -12,7 +12,7 @@
   cursor: pointer;
   &.slick-prev {
     left: -52px;
-    background: url(./images/ic_arrow_right.svg);
+    background: url(../../../assets/images/ic_arrow_left.svg);
     background-repeat: no-repeat;
     background-position: center;
     &.slick-disabled {
@@ -21,7 +21,7 @@
   }
   &.slick-next {
     right: -52px;
-    background: url(./images/ic_arrow_left.svg);
+    background: url(../../../assets/images/ic_arrow_right.svg);
     background-repeat: no-repeat;
     background-position: center;
     &.slick-disabled {

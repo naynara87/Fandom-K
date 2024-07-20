@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import Slider from "react-slick";
 
-import plusIcon from "../../assets/images/ic_plus.svg";
+import plusIcon from "../../../../assets/images/ic_plus.svg";
 import "./AddFavoriteIdolList.css";
 
 import useIdolData from "../../../../hooks/useIdolData";
