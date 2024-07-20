@@ -2,9 +2,9 @@ import React, { useContext } from "react";
 
 import "./ThisMonthsChart.css";
 
-import { CreditContext } from '../../../../context/CreditContextProvider';
-import useIdolData from '../../../../hooks/useIdolData';
-import useChartFunc from '../../../../hooks/useChartFunc';
+import { CreditContext } from "../../../../context/CreditContextProvider";
+import useIdolData from "../../../../hooks/useIdolData";
+import useChartFunc from "../../../../hooks/useChartFunc";
 
 import IdolDetail from "../IdolDetail";
 import ChartVoteModal from "../ChartVoteModal/ChartVoteModal";

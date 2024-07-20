@@ -91,7 +91,7 @@ function DonationsList() {
                   }}
                   disabled={donation.receivedDonations >= donation.targetDonation}
                 >
-                  {donation.receivedDonations >= donation.targetDonation ? '후원완료' : '후원하기'}
+                  {donation.receivedDonations >= donation.targetDonation ? "후원완료" : "후원하기"}
                 </button>
               </div>
               <div className="info">

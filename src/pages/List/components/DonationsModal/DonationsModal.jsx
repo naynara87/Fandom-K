@@ -21,7 +21,7 @@ function DonationsModal({ profilePicture, subtitle, title, closeModal, isOpen, u
     localCredit,
     selectedDonation,
     updateProgressbar,
-    closeModal
+    closeModal,
   );
 
   useEscapeModal(closeModal);

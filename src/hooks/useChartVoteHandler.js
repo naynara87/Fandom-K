@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import postVotes from '../api/postApi';
+import { useState, useEffect } from "react";
+import postVotes from "../api/postApi";
 
 const useChartVoteHandler = (gender, closeModal, idolRank, updateIdolRank, handleCreditUpdate, localCredit) => {
   const [selectedIdolId, setSelectedIdolId] = useState(null);
