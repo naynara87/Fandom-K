@@ -1,17 +1,17 @@
-import React, { useState, useMemo, useEffect, useContext } from "react";
+import React, { useMemo, useContext } from "react";
 import Slider from "react-slick";
-
-import calculateTime from "../../../utils/calculateTime";
-import formatNumber from "../../../utils/formatNumber";
-import LoadingBar from "../../../components/Loadingbar";
 
 import "./DonationList.css";
 
+import calculateTime from "../../../utils/calculateTime";
+import formatNumber from "../../../utils/formatNumber";
 import useDonationList from "../../../hooks/useDonationList";
+import useDonationFunc from "../../../hooks/useDonationFunc";
+
+import LoadingBar from "../../../components/Loadingbar";
+import { CreditContext } from "../../../components/CreditContextProvider";
 import DonationsModal from "./DonationsModal/DonationsModal";
 import LackOfCreditModal from "./LackOfCreditModal/LackOfCreditModal";
-
-import { CreditContext } from "../../../components/CreditContextProvider";
 
 function DonationsList() {
   const {
@@ -20,41 +20,22 @@ function DonationsList() {
     localCredit,
     setLocalReceivedDonations,
   } = useContext(CreditContext);
+
   const { donations, loading, fetchData } = useDonationList();
-  const [showDonationsModal, setShowDonationsModal] = useState(false);
-  const [showLackOfCreditModal, setShowLackOfCreditModal] = useState(false);
 
-  const openLackOfCreditModal = () => setShowLackOfCreditModal(true);
-
-  const openDonationsModal = (donation) => {
-    setSelectedDonation(donation);
-    setShowDonationsModal(true);
-  };
-
-  useEffect(() => {
-    if (selectedDonation) {
-      setLocalReceivedDonations(selectedDonation.receivedDonations);
-    }
-  }, [selectedDonation.id]);
-
-  const openModal = (donation) => {
-    if (localCredit <= 0) {
-      openLackOfCreditModal();
-    } else {
-      openDonationsModal(donation);
-    }
-  };
-
-  const updateProgressbar = () => {
-    fetchData(true);
-  };
-
-  const closeModal = () => {
-    if (showDonationsModal) {
-      setShowDonationsModal(false);
-    }
-    setShowLackOfCreditModal(false);
-  };
+  const {
+    showDonationsModal,
+    showLackOfCreditModal,
+    openModal,
+    closeModal,
+    updateProgressbar,
+  } = useDonationFunc(
+    selectedDonation,
+    setSelectedDonation,
+    localCredit,
+    setLocalReceivedDonations,
+    fetchData
+  );
 
   const sliderSettings = useMemo(
     () => ({
@@ -78,24 +59,24 @@ function DonationsList() {
         },
       ],
     }),
-    [],
+    []
   );
 
   if (loading) {
     return (
-      <seciton className="section donation">
+      <section className="section donation">
         <div className="donation-header">
           <h3 className="title">후원을 기다리는 조공</h3>
         </div>
         <div className="donation-wrap">
           <LoadingBar />
         </div>
-      </seciton>
+      </section>
     );
   }
 
   return (
-    <seciton className="section donation">
+    <section className="section donation">
       <div className="section-header">
         <h3 className="title">후원을 기다리는 조공</h3>
       </div>
@@ -163,7 +144,7 @@ function DonationsList() {
         )}
         {showLackOfCreditModal && <LackOfCreditModal closeModal={closeModal} />}
       </div>
-    </seciton>
+    </section>
   );
 }
 
