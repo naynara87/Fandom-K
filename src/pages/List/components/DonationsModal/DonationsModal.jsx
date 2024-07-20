@@ -7,7 +7,7 @@ import useEscapeModal from "../../../../hooks/useEscapeModal";
 import useDonationHandler from "../../../../hooks/useDonationHandler";
 import handleBackgroundClick from "../../../../utils/handleBackgroundClick";
 
-import { CreditContext } from "../../../../components/CreditContextProvider";
+import { CreditContext } from "../../../../context/CreditContextProvider";
 import CloseButton from "./CloseButton";
 
 function DonationsModal({ profilePicture, subtitle, title, closeModal, isOpen, updateProgressbar }) {
@@ -21,7 +21,7 @@ function DonationsModal({ profilePicture, subtitle, title, closeModal, isOpen, u
     localCredit,
     selectedDonation,
     updateProgressbar,
-    closeModal,
+    closeModal
   );
 
   useEscapeModal(closeModal);
