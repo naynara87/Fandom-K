@@ -47,7 +47,10 @@ function DonationsModal({
   if (!isOpen) return null;
 
   return (
-    <div className="modal-overlay" onClick={(e) => handleBackgroundClick(e, closeModal)}>
+    <div
+      className="modal-overlay"
+      onClick={(e) => handleBackgroundClick(e, closeModal)}
+    >
       <div className="modal modal-donation">
         <div className="modal-header">
           <h4 className="title">후원하기</h4>
