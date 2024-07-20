@@ -28,8 +28,3 @@ button {
   background: none;
   border: none;
 }
-
-section,
-.section {
-  display: block;
-}
