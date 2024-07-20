@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 
 import donationCredit from "../../../../assets/images/ico_credit_non_gradation.png";
 
 import "./DonationsModal.css";
 import useEscapeModal from "../../../../hooks/useEscapeModal";
-import putDonations from "../../../../service/putApi";
+import useDonationHandler from "../../../../hooks/useDonationHandler";
 import handleBackgroundClick from "../../../../utils/handleBackgroundClick";
 
 import { CreditContext } from "../../../../components/CreditContextProvider";
@@ -26,75 +26,31 @@ function DonationsModal({
     selectedDonation,
   } = useContext(CreditContext);
 
-  const [value, setValue] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [myCredit, setMyCredit] = useState(localCredit);
-  const [receivedDonations, setReceivedDonations] = useState(
-    localReceivedDonations
+  const {
+    value,
+    errorMessage,
+    isDonationValid,
+    handleInputChange,
+    onClickDonations,
+  } = useDonationHandler(
+    handleCreditUpdate,
+    handleReceivedDonationsUpdate,
+    localReceivedDonations,
+    localCredit,
+    selectedDonation,
+    updateProgressbar,
+    closeModal,
   );
-  const [isDonationValid, setIsDonationValid] = useState(false);
 
-  useEffect(() => {
-    setMyCredit(localCredit);
-    setReceivedDonations(localReceivedDonations);
-  }, [localCredit, localReceivedDonations]);
-
-  const handleInputChange = (e) => {
-    const inputValue = e.target.value.trim();
-    setValue(inputValue);
-
-    if (inputValue === "") {
-      setErrorMessage("");
-      setIsDonationValid(false);
-    } else {
-      const numericValue = parseInt(inputValue, 10);
-
-
-      if (numericValue > myCredit) {
-        setErrorMessage("갖고 있는 크레딧보다 더 많이 후원할 수 없어요");
-        setIsDonationValid(false);
-      } else if (
-        selectedDonation.receivedDonations + numericValue >
-        selectedDonation.targetDonation
-      ) {
-        setErrorMessage("후원 금액이 목표 금액을 초과합니다");
-        setIsDonationValid(false);
-      } else {
-        setButtonType("active");
-        setErrorMessage("");
-        setIsDonationValid(true);
-      }
-    }
-  };
-
-  const onClickDonations = async () => {
-    if (selectedDonation) {
-      try {
-        const newCredit = myCredit - value;
-        handleCreditUpdate(newCredit);
-        setMyCredit(newCredit);
-
-        updateProgressbar();
-
-        const newReceivedDonations = receivedDonations + value;
-
-        await handleReceivedDonationsUpdate(newReceivedDonations);
-        putDonations(selectedDonation, value);
-        setReceivedDonations(newReceivedDonations);
-      } catch (error) {
-        console.error("Failed to donate:", error);
-      } finally {
-        closeModal();
-      }
-    }
-  };
-
-  useEscapeModal();
+  useEscapeModal(closeModal);
 
   if (!isOpen) return null;
 
   return (
-    <div className="modal-overlay" onClick={handleBackgroundClick}>
+    <div
+      className="modal-overlay"
+      onClick={(e) => handleBackgroundClick(e, closeModal)}
+    >
       <div className="modal modal-donation">
         <div className="modal-header">
           <h4 className="title">후원하기</h4>
