@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import getIdolChunks from "../../../utils/getIdolChucks";
+import getIdolChunks from "../utils/getIdolChucks";
 
 const useIdolChunks = (idolData) => {
   const [idolChunks, setIdolChunks] = useState([]);

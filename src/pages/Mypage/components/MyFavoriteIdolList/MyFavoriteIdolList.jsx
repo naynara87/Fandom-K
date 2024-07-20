@@ -1,6 +1,6 @@
 import React from "react";
 import "./MyFavoriteIdolList.css";
-import useHorizontalScroll from "../../hooks/useHorizontalScroll";
+import useHorizontalScroll from "../../../../hooks/useHorizontalScroll";
 import MyIdolListItem from "./MyIdolListItem/MyIdolListItem";
 
 function MyFavoriteIdolList({ myFavoriteIdolList, setMyFavoriteIdolList }) {

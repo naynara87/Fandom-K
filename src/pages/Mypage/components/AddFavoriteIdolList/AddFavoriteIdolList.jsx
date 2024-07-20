@@ -5,9 +5,9 @@ import plusIcon from "../../assets/images/ic_plus.svg";
 import "./AddFavoriteIdolList.css";
 
 import useIdolData from "../../../../hooks/useIdolData";
-import useIdolChunks from "../../hooks/useIdolChunks";
-import useShowArrow from "../../hooks/useShowArrow";
-import useManageIdols from "../../hooks/useManageIdols";
+import useIdolChunks from "../../../../hooks/useIdolChunks";
+import useShowArrow from "../../../../hooks/useShowArrow";
+import useManageIdols from "../../../../hooks/useManageIdols";
 
 import LoadingBar from "../../../../components/Loadingbar";
 import AddIdolListButton from "./AddIdolListButton/AddIdolListButton";
