@@ -1,0 +1,51 @@
+.credit {
+  margin-top: 50px;
+  width: 100%;
+  @media (max-width: 1199px) {
+    margin-top: 0;
+    padding: 0 24px;
+  }
+  .credit-wrap {
+    border: 1px solid rgba(241, 238, 249, 0.8);
+    border-radius: 8px;
+    color: var(--white);
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    padding: 30px 78px;
+    align-items: center;
+    justify-content: space-between;
+    @media (max-width: 1199px) {
+      padding: 32px 64px;
+    }
+    @media (max-width: 767px) {
+      padding: 20px;
+    }
+  }
+
+  .credit-title {
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 2;
+    @media (max-width: 767px) {
+      font-size: 12px;
+    }
+  }
+
+  .credit-balance {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 700;
+    gap: 5px;
+    @media (max-width: 767px) {
+      font-size: 20px;
+    }
+  }
+
+  .icon-md {
+    width: 12px;
+    height: 30px;
+  }
+}

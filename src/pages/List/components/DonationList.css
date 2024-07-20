@@ -1,0 +1,117 @@
+@import "../../../components/Slide.css";
+
+.donation {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 50px 0 80px;
+  @media (max-width: 1199px) {
+    padding: 60px 0;
+  }
+  @media (max-width: 767px) {
+    padding: 40px 0;
+  }
+  .donation-wrap {
+    position: relative;
+    @media (max-width: 1199px) {
+      overflow: hidden;
+    }
+  }
+  .donation-list {
+    margin: 0 -12px;
+    .donation-card {
+      padding: 0 12px;
+      .img-wrap {
+        position: relative;
+        padding-top: 100%;
+        border-radius: 8px;
+        overflow: hidden;
+        &::after {
+          content: "";
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0) 59%,
+            rgba(0, 0, 0, 1) 100%
+          );
+        }
+        img {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+        }
+        button {
+          position: absolute;
+          width: 80%;
+          font-size: 13px;
+          font-weight: 600;
+          bottom: 1rem;
+          left: 50%;
+          transform: translate(-50%, 0);
+          z-index: 1;
+        }
+        button.button_inactive {
+          background-color: #828282;
+        }
+        button.button_active {
+          background-color: var(--brand-gradation);
+        }
+      }
+      .info {
+        padding: 10px 0;
+        .place {
+          font-size: 16px;
+          color: var(--white);
+          opacity: 0.4;
+          @media (max-width: 767px) {
+            font-size: 12px;
+          }
+        }
+        .title {
+          font-size: 18px;
+          color: var(--gray-100);
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          @media (max-width: 767px) {
+            font-size: 14px;
+          }
+        }
+        .target-credit {
+          display: flex;
+          align-items: center;
+          font-size: 12px;
+          color: var(--brand-orange);
+        }
+        .deadline {
+          font-size: 12px;
+        }
+        .progress-info {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 7px;
+          margin-top: 20px;
+        }
+        .progress-bar {
+          display: block;
+          height: 1px;
+          background-color: var(--white);
+          .percent {
+            width: 0%;
+            height: inherit;
+            background-color: var(--brand-orange);
+            transition: width 0.4s ease-in-out;
+          }
+        }
+      }
+    }
+  }
+}
