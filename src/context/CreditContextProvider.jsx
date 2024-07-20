@@ -1,10 +1,10 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useCallback } from 'react';
 
 export const CreditContext = React.createContext();
 
 function CreditContextProvider({ children }) {
   const initialCredit = () => {
-    const storedCredit = JSON.parse(localStorage.getItem("myCredit"));
+    const storedCredit = JSON.parse(localStorage.getItem('myCredit'));
     return storedCredit || 0;
   };
 
@@ -15,7 +15,7 @@ function CreditContextProvider({ children }) {
 
   const handleCreditUpdate = (newCredit) => {
     setLocalCredit(newCredit);
-    localStorage.setItem("myCredit", newCredit.toString());
+    localStorage.setItem('myCredit', newCredit.toString());
   };
 
   const handleReceivedDonationsUpdate = (newReceivedDonations) => {
@@ -27,7 +27,7 @@ function CreditContextProvider({ children }) {
       setLocalCredit(localCredit + amount);
       setIsModalOpen(false);
     },
-    [localCredit]
+    [localCredit],
   );
 
   const contextValue = useMemo(() => {
@@ -43,13 +43,7 @@ function CreditContextProvider({ children }) {
       isModalOpen,
       setIsModalOpen,
     };
-  }, [
-    localCredit,
-    localReceivedDonations,
-    selectedDonation,
-    isModalOpen,
-    handleRecharge,
-  ]);
+  }, [localCredit, localReceivedDonations, selectedDonation, isModalOpen, handleRecharge]);
 
   return <CreditContext.Provider value={contextValue}>{children}</CreditContext.Provider>;
 }
