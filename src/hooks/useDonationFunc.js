@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
-const useDonationFunc = (selectedDonation, setSelectedDonation, localCredit, setLocalReceivedDonations, fetchData) => {
+const useDonationFunc = (selectedDonation, setSelectedDonation, localCredit, setLocalReceivedDonations) => {
   const [showDonationsModal, setShowDonationsModal] = useState(false);
   const [showLackOfCreditModal, setShowLackOfCreditModal] = useState(false);
 
@@ -25,16 +25,11 @@ const useDonationFunc = (selectedDonation, setSelectedDonation, localCredit, set
     setShowLackOfCreditModal(false);
   };
 
-  const updateProgressbar = () => {
-    fetchData(true);
-  };
-
   return {
     showDonationsModal,
     showLackOfCreditModal,
     openModal,
     closeModal,
-    updateProgressbar,
   };
 };
 

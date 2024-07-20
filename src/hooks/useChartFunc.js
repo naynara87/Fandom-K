@@ -1,37 +1,45 @@
-import { useState } from "react";
-import useIdolData from "./useIdolData";
-import usePageResize from "./usePageResize";
+import { useState, useCallback } from 'react';
+import useIdolData from './useIdolData';
+import usePageResize from './usePageResize';
 
 const useChartFunc = (localCredit) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showLackOfCreditModal, setShowLackOfCreditModal] = useState(false);
-  const [activeTab, setActiveTab] = useState("female");
+  const [activeTab, setActiveTab] = useState('female');
 
   const { fetchIdolsData } = useIdolData(activeTab);
   const { pageSize, displayCount, setDisplayCount } = usePageResize();
 
-  const tab = (gender) => {
-    setActiveTab(gender);
-    setDisplayCount(pageSize);
-  };
+  const tab = useCallback(
+    (gender) => {
+      setActiveTab(gender);
+      setDisplayCount(pageSize);
+      fetchIdolsData(gender, pageSize);
+    },
+    [fetchIdolsData, pageSize],
+  );
 
-  const openModal = () => {
-    if (localCredit < 1000) setShowLackOfCreditModal(true);
-    else setIsModalOpen(true);
-  };
+  const openModal = useCallback(() => {
+    if (localCredit < 1000) {
+      setShowLackOfCreditModal(true);
+    } else {
+      setIsModalOpen(true);
+      fetchIdolsData(activeTab, displayCount); // Ensure data is fetched when modal opens
+    }
+  }, [localCredit, fetchIdolsData, activeTab, displayCount]);
 
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     setIsModalOpen(false);
     setShowLackOfCreditModal(false);
-  };
+  }, []);
 
-  const updateIdolRank = () => {
-    fetchIdolsData(true);
-  };
-
-  const loadMore = () => {
-    setDisplayCount((prevCount) => prevCount + pageSize);
-  };
+  const loadMore = useCallback(() => {
+    setDisplayCount((prevCount) => {
+      const newCount = prevCount + pageSize;
+      fetchIdolsData(activeTab, newCount); // Fetch more data when loading more
+      return newCount;
+    });
+  }, [fetchIdolsData, pageSize, activeTab]);
 
   return {
     isModalOpen,
@@ -41,7 +49,6 @@ const useChartFunc = (localCredit) => {
     tab,
     openModal,
     closeModal,
-    updateIdolRank,
     loadMore,
   };
 };
