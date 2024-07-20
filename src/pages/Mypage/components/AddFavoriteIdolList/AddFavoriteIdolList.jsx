@@ -1,13 +1,13 @@
-import React, { useMemo } from "react";
+import React from "react";
 import Slider from "react-slick";
 
-import plusIcon from "../../assets/images/ic_plus.svg";
+import plusIcon from "../../../../assets/images/ic_plus.svg";
 import "./AddFavoriteIdolList.css";
 
 import useIdolData from "../../../../hooks/useIdolData";
-import useIdolChunks from "../../hooks/useIdolChunks";
-import useShowArrow from "../../hooks/useShowArrow";
-import useManageIdols from "../../hooks/useManageIdols";
+import useIdolChunks from "../../../../hooks/useIdolChunks";
+import useShowArrow from "../../../../hooks/useShowArrow";
+import useManageIdols from "../../../../hooks/useManageIdols";
 
 import LoadingBar from "../../../../components/Loadingbar";
 import AddIdolListButton from "./AddIdolListButton/AddIdolListButton";
@@ -22,15 +22,12 @@ function AddFavoriteIdolList({ myFavoriteIdolList, setMyFavoriteIdolList }) {
     setMyFavoriteIdolList,
   );
 
-  const sliderSettings = useMemo(
-    () => ({
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      infinite: false,
-      arrows: showArrow,
-    }),
-    [],
-  );
+  const sliderSettings = {
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    infinite: false,
+    arrows: showArrow,
+  };
 
   if (isLoading) {
     return (

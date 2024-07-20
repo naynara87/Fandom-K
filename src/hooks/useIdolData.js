@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { getIdols, getCharts } from '../api/getApi';
+import { useEffect, useState } from "react";
+import { getIdols, getCharts } from "../api/getApi";
 
 const useIdolData = (gender = null) => {
   const [idolData, setIdolData] = useState([]);
@@ -18,7 +18,7 @@ const useIdolData = (gender = null) => {
       setFetchError(null);
       setIsLoading(false);
     } catch (error) {
-      console.error('데이터 불러오기 중 오류 발생:', error);
+      console.error("데이터 불러오기 중 오류 발생:", error);
       setFetchError(error);
       throw error;
     } finally {

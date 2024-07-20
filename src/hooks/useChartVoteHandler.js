@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import postVotes from '../api/postApi';
+import { useState, useEffect } from "react";
+import postVotes from "../api/postApi";
 
 const useChartVoteHandler = (gender, closeModal, idolRank, updateIdolRank, handleCreditUpdate, localCredit) => {
   const [selectedIdolId, setSelectedIdolId] = useState(null);
@@ -26,7 +26,7 @@ const useChartVoteHandler = (gender, closeModal, idolRank, updateIdolRank, handl
         handleCreditUpdate(newCredit);
         setMyCredit(newCredit);
       } catch (error) {
-        console.error('차트 투표하기 중 오류 발생:', error);
+        console.error("차트 투표하기 중 오류 발생:", error);
       } finally {
         closeModal();
       }
