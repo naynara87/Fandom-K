@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from "react";
 
 import "./MyCredit.css";
-import { CreditContext } from "../../../../components/CreditContextProvider";
+import { CreditContext } from "../../../../context/CreditContextProvider";
 import CreditModal from "../CreditModal/CreditModal";
 
 function MyCredit() {

@@ -4,7 +4,7 @@ import "./ChartVoteModal.css";
 import useChartVoteHandler from "../../../../hooks/useChartVoteHandler";
 import useEscapeModal from "../../../../hooks/useEscapeModal";
 
-import { CreditContext } from "../../../../components/CreditContextProvider";
+import { CreditContext } from "../../../../context/CreditContextProvider";
 import IdolDetail from "../IdolDetail";
 
 function ChartVoteModal({ closeModal, idolRank, gender, updateIdolRank }) {
@@ -16,7 +16,7 @@ function ChartVoteModal({ closeModal, idolRank, gender, updateIdolRank }) {
       idolRank,
       updateIdolRank,
       handleCreditUpdate,
-      localCredit,
+      localCredit
     );
   useEscapeModal(closeModal);
 

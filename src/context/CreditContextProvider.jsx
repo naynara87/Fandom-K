@@ -22,10 +22,13 @@ function CreditContextProvider({ children }) {
     setLocalReceivedDonations(newReceivedDonations);
   };
 
-  const handleRecharge = (amount) => {
-    setLocalCredit(localCredit + amount);
-    setIsModalOpen(false);
-  };
+  const handleRecharge = useCallback(
+    (amount) => {
+      setLocalCredit(localCredit + amount);
+      setIsModalOpen(false);
+    },
+    [localCredit]
+  );
 
   const contextValue = useMemo(() => {
     return {
@@ -40,7 +43,13 @@ function CreditContextProvider({ children }) {
       isModalOpen,
       setIsModalOpen,
     };
-  }, [localCredit, localReceivedDonations, selectedDonation, isModalOpen]);
+  }, [
+    localCredit,
+    localReceivedDonations,
+    selectedDonation,
+    isModalOpen,
+    handleRecharge,
+  ]);
 
   return (
     <CreditContext.Provider value={contextValue}>

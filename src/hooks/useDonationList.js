@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getDonations } from "../service/getApi";
+import { getDonations } from "../api/getApi";
 
 const useDonationList = () => {
   const [donations, setDonations] = useState([]);

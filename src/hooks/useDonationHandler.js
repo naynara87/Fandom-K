@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import putDonations from "../service/putApi";
+import putDonations from "../api/putApi";
 
 const useDonationHandler = (
   handleCreditUpdate,
@@ -8,13 +8,13 @@ const useDonationHandler = (
   localCredit,
   selectedDonation,
   updateProgressbar,
-  closeModal,
+  closeModal
 ) => {
   const [value, setValue] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [myCredit, setMyCredit] = useState(localCredit);
   const [receivedDonations, setReceivedDonations] = useState(
-    localReceivedDonations,
+    localReceivedDonations
   );
   const [isDonationValid, setIsDonationValid] = useState(false);
 
@@ -57,12 +57,10 @@ const useDonationHandler = (
         handleCreditUpdate(newCredit);
         setMyCredit(newCredit);
 
-        updateProgressbar();
-
         const newReceivedDonations = receivedDonations + value;
-
-        await handleReceivedDonationsUpdate(newReceivedDonations);
-        putDonations(selectedDonation, value);
+        await putDonations(selectedDonation, value);
+        updateProgressbar();
+        handleReceivedDonationsUpdate(newReceivedDonations);
         setReceivedDonations(newReceivedDonations);
       } catch (error) {
         console.error("후원하기 중 오류 발생:", error);
