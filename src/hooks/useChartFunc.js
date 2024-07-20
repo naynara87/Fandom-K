@@ -1,11 +1,11 @@
-import { useState, useCallback } from 'react';
-import useIdolData from './useIdolData';
-import usePageResize from './usePageResize';
+import { useState, useCallback } from "react";
+import useIdolData from "./useIdolData";
+import usePageResize from "./usePageResize";
 
 const useChartFunc = (localCredit) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showLackOfCreditModal, setShowLackOfCreditModal] = useState(false);
-  const [activeTab, setActiveTab] = useState('female');
+  const [activeTab, setActiveTab] = useState("female");
 
   const { fetchIdolsData } = useIdolData(activeTab);
   const { pageSize, displayCount, setDisplayCount } = usePageResize();
