@@ -5,8 +5,7 @@ import { CreditContext } from "../../../../context/CreditContextProvider";
 import CreditModal from "../CreditModal/CreditModal";
 
 function MyCredit() {
-  const { localCredit, isModalOpen, setIsModalOpen } =
-    useContext(CreditContext);
+  const { localCredit, isModalOpen, setIsModalOpen } = useContext(CreditContext);
 
   useEffect(() => {
     localStorage.setItem("myCredit", JSON.stringify(localCredit));
@@ -22,11 +21,7 @@ function MyCredit() {
             {localCredit.toLocaleString()}
           </div>
         </div>
-        <button
-          type="button"
-          className="btn-credit-recharge"
-          onClick={() => setIsModalOpen(true)}
-        >
+        <button type="button" className="btn-credit-recharge" onClick={() => setIsModalOpen(true)}>
           충전하기
         </button>
       </div>

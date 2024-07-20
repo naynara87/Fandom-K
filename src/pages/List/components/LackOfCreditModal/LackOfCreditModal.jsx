@@ -10,10 +10,7 @@ function LackOfCreditModal({ closeModal }) {
   useEscapeModal(closeModal);
 
   return (
-    <div
-      className="modal-overlay"
-      onClick={(e) => handleBackgroundClick(e, closeModal)}
-    >
+    <div className="modal-overlay" onClick={(e) => handleBackgroundClick(e, closeModal)}>
       <div className="modal modal-lack-of-credit">
         <div className="modal-header">
           <CloseButton onClick={closeModal} />

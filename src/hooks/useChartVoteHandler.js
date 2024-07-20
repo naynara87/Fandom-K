@@ -1,14 +1,7 @@
-import { useState, useEffect } from "react";
-import postVotes from "../service/postApi";
+import { useState, useEffect } from 'react';
+import postVotes from '../service/postApi';
 
-const useChartVoteHandler = (
-  gender,
-  closeModal,
-  idolRank,
-  updateIdolRank,
-  handleCreditUpdate,
-  localCredit,
-) => {
+const useChartVoteHandler = (gender, closeModal, idolRank, updateIdolRank, handleCreditUpdate, localCredit) => {
   const [selectedIdolId, setSelectedIdolId] = useState(null);
   const [myCredit, setMyCredit] = useState(localCredit);
 
@@ -18,7 +11,7 @@ const useChartVoteHandler = (
     if (idolRank.length > 0) {
       setSelectedIdolId(idolRank[0].id);
     }
-  }, [idolRank, gender]);
+  }, [idolRank, gender, localCredit]);
 
   const handleIdolRadioClick = (idolId) => {
     setSelectedIdolId(idolId);
@@ -28,13 +21,12 @@ const useChartVoteHandler = (
     if (selectedIdolId) {
       try {
         await postVotes(selectedIdolId);
-        updateIdolRank();
-
+        await updateIdolRank();
         const newCredit = myCredit - 1000;
         handleCreditUpdate(newCredit);
         setMyCredit(newCredit);
       } catch (error) {
-        console.error("차트 투표하기 중 오류 발생:", error);
+        console.error('차트 투표하기 중 오류 발생:', error);
       } finally {
         closeModal();
       }

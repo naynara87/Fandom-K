@@ -51,11 +51,7 @@ function CreditContextProvider({ children }) {
     handleRecharge,
   ]);
 
-  return (
-    <CreditContext.Provider value={contextValue}>
-      {children}
-    </CreditContext.Provider>
-  );
+  return <CreditContext.Provider value={contextValue}>{children}</CreditContext.Provider>;
 }
 
 export default CreditContextProvider;
