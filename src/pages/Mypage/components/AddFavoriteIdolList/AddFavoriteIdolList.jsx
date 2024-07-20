@@ -16,8 +16,11 @@ function AddFavoriteIdolList({ myFavoriteIdolList, setMyFavoriteIdolList }) {
   const { idolData, isLoading = true } = useIdolData();
   const idolChunks = useIdolChunks(idolData);
   const showArrow = useShowArrow();
-  const { isSelected, handleSelectIdolButtonClick, handleAddIdolButtonClick } =
-    useManageIdols(idolData, myFavoriteIdolList, setMyFavoriteIdolList);
+  const { isSelected, handleSelectIdolButtonClick, handleAddIdolButtonClick } = useManageIdols(
+    idolData,
+    myFavoriteIdolList,
+    setMyFavoriteIdolList,
+  );
 
   const sliderSettings = useMemo(
     () => ({

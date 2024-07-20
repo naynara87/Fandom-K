@@ -1,12 +1,6 @@
 import { useState, useEffect } from "react";
 
-const useDonationFunc = (
-  selectedDonation,
-  setSelectedDonation,
-  localCredit,
-  setLocalReceivedDonations,
-  fetchData,
-) => {
+const useDonationFunc = (selectedDonation, setSelectedDonation, localCredit, setLocalReceivedDonations, fetchData) => {
   const [showDonationsModal, setShowDonationsModal] = useState(false);
   const [showLackOfCreditModal, setShowLackOfCreditModal] = useState(false);
 
@@ -18,8 +12,7 @@ const useDonationFunc = (
   };
 
   useEffect(() => {
-    if (selectedDonation)
-      setLocalReceivedDonations(selectedDonation.receivedDonations);
+    if (selectedDonation) setLocalReceivedDonations(selectedDonation.receivedDonations);
   }, [selectedDonation.id]);
 
   const openModal = (donation) => {

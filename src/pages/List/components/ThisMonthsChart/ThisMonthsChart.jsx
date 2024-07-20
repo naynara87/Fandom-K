@@ -30,12 +30,7 @@ function ThisMonthsChart() {
     <section className="section chart">
       <div className="section-header">
         <h3 className="title">이달의 차트</h3>
-        <button
-          type="button"
-          aria-label="차트 투표하기"
-          className="btn-modal-open"
-          onClick={openModal}
-        >
+        <button type="button" aria-label="차트 투표하기" className="btn-modal-open" onClick={openModal}>
           <i className="icon-md icon-chart" />
           차트 투표하기
         </button>
@@ -68,18 +63,11 @@ function ThisMonthsChart() {
       <ul className="ranking-list">
         {!isLoading &&
           !fetchError &&
-          idolData
-            .slice(0, displayCount)
-            .map((idol) => <IdolDetail key={idol.id} idolData={idol} />)}
+          idolData.slice(0, displayCount).map((idol) => <IdolDetail key={idol.id} idolData={idol} />)}
       </ul>
 
       {displayCount < idolData.length && (
-        <button
-          className="btn-more"
-          type="button"
-          aria-label="더보기 버튼"
-          onClick={loadMore}
-        >
+        <button className="btn-more" type="button" aria-label="더보기 버튼" onClick={loadMore}>
           더 보기
         </button>
       )}

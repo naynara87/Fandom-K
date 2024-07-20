@@ -1,14 +1,7 @@
 import { useState, useEffect } from "react";
 import postVotes from "../service/postApi";
 
-const useChartVoteHandler = (
-  gender,
-  closeModal,
-  idolRank,
-  updateIdolRank,
-  handleCreditUpdate,
-  localCredit,
-) => {
+const useChartVoteHandler = (gender, closeModal, idolRank, updateIdolRank, handleCreditUpdate, localCredit) => {
   const [selectedIdolId, setSelectedIdolId] = useState(null);
   const [myCredit, setMyCredit] = useState(localCredit);
 

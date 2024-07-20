@@ -14,22 +14,11 @@ import DonationsModal from "./DonationsModal/DonationsModal";
 import LackOfCreditModal from "./LackOfCreditModal/LackOfCreditModal";
 
 function DonationsList() {
-  const {
-    selectedDonation,
-    setSelectedDonation,
-    localCredit,
-    setLocalReceivedDonations,
-  } = useContext(CreditContext);
+  const { selectedDonation, setSelectedDonation, localCredit, setLocalReceivedDonations } = useContext(CreditContext);
 
   const { donations, loading, fetchData } = useDonationList();
 
-  const {
-    showDonationsModal,
-    showLackOfCreditModal,
-    openModal,
-    closeModal,
-    updateProgressbar,
-  } = useDonationFunc(
+  const { showDonationsModal, showLackOfCreditModal, openModal, closeModal, updateProgressbar } = useDonationFunc(
     selectedDonation,
     setSelectedDonation,
     localCredit,
@@ -99,9 +88,7 @@ function DonationsList() {
                   onClick={() => {
                     openModal(donation);
                   }}
-                  disabled={
-                    donation.receivedDonations >= donation.targetDonation
-                  }
+                  disabled={donation.receivedDonations >= donation.targetDonation}
                 >
                   후원하기
                 </button>
@@ -115,9 +102,7 @@ function DonationsList() {
                       <i className="icon-sm icon-credit" />
                       {formatNumber(donation.targetDonation)}
                     </div>
-                    <div className="deadline">
-                      {calculateTime(donation.deadline)}
-                    </div>
+                    <div className="deadline">{calculateTime(donation.deadline)}</div>
                   </div>
                   <div className="progress-bar">
                     <div

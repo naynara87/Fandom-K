@@ -7,9 +7,7 @@ function MyFavoriteIdolList({ myFavoriteIdolList, setMyFavoriteIdolList }) {
   const listWrapperRef = useHorizontalScroll();
 
   const handleDeleteIdolButtonClick = (deleteIdolId) => {
-    const updatedIdolList = myFavoriteIdolList.filter(
-      (idol) => idol.id !== deleteIdolId,
-    );
+    const updatedIdolList = myFavoriteIdolList.filter((idol) => idol.id !== deleteIdolId);
     setMyFavoriteIdolList(updatedIdolList);
   };
 
@@ -19,13 +17,7 @@ function MyFavoriteIdolList({ myFavoriteIdolList, setMyFavoriteIdolList }) {
         <div className="empty-message">앗! 아직 관심 있는 아이돌이 없어요</div>
       ) : (
         myFavoriteIdolList.map((idol) => {
-          return (
-            <MyIdolListItem
-              key={idol.id}
-              idolData={idol}
-              onClick={handleDeleteIdolButtonClick}
-            />
-          );
+          return <MyIdolListItem key={idol.id} idolData={idol} onClick={handleDeleteIdolButtonClick} />;
         })
       )}
     </div>

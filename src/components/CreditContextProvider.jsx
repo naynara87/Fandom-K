@@ -42,11 +42,7 @@ function CreditContextProvider({ children }) {
     };
   }, [localCredit, localReceivedDonations, selectedDonation, isModalOpen]);
 
-  return (
-    <CreditContext.Provider value={contextValue}>
-      {children}
-    </CreditContext.Provider>
-  );
+  return <CreditContext.Provider value={contextValue}>{children}</CreditContext.Provider>;
 }
 
 export default CreditContextProvider;

@@ -13,9 +13,7 @@ const useDonationHandler = (
   const [value, setValue] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [myCredit, setMyCredit] = useState(localCredit);
-  const [receivedDonations, setReceivedDonations] = useState(
-    localReceivedDonations,
-  );
+  const [receivedDonations, setReceivedDonations] = useState(localReceivedDonations);
   const [isDonationValid, setIsDonationValid] = useState(false);
 
   useEffect(() => {
@@ -33,9 +31,7 @@ const useDonationHandler = (
     } else {
       const numericValue = parseInt(inputValue, 10);
       const isValueExceedsCredit = numericValue > myCredit;
-      const isDonationExceedsGoal =
-        selectedDonation.receivedDonations + numericValue >
-        selectedDonation.targetDonation;
+      const isDonationExceedsGoal = selectedDonation.receivedDonations + numericValue > selectedDonation.targetDonation;
 
       if (isValueExceedsCredit) {
         setErrorMessage("갖고 있는 크레딧보다 더 많이 후원할 수 없어요");
