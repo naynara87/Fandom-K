@@ -9,7 +9,7 @@ import useDonationList from '../../../hooks/useDonationList';
 import useDonationFunc from '../../../hooks/useDonationFunc';
 
 import LoadingBar from '../../../components/Loadingbar';
-import { CreditContext } from '../../../components/CreditContextProvider';
+import { CreditContext } from '../../../context/CreditContextProvider';
 import DonationsModal from './DonationsModal/DonationsModal';
 import LackOfCreditModal from './LackOfCreditModal/LackOfCreditModal';
 
@@ -91,7 +91,7 @@ function DonationsList() {
                   }}
                   disabled={donation.receivedDonations >= donation.targetDonation}
                 >
-                  후원하기
+                  {donation.receivedDonations >= donation.targetDonation ? '후원완료' : '후원하기'}
                 </button>
               </div>
               <div className="info">

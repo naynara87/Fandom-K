@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 
 import './ThisMonthsChart.css';
 
-import { CreditContext } from '../../../../components/CreditContextProvider';
+import { CreditContext } from '../../../../context/CreditContextProvider';
 import useIdolData from '../../../../hooks/useIdolData';
 import useChartFunc from '../../../../hooks/useChartFunc';
 

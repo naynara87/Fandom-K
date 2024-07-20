@@ -4,7 +4,7 @@ import Header from "../../components/Header";
 import DonationsList from "./components/DonationList";
 import ThisMonthsChart from "./components/ThisMonthsChart/ThisMonthsChart";
 import MyCredit from "./components/MyCredit/MyCredit";
-import CreditContextProvider from "../../components/CreditContextProvider";
+import CreditContextProvider from "../../context/CreditContextProvider";
 
 function List() {
   return (
