@@ -1,5 +1,5 @@
-@import "slick-carousel/slick/slick.css";
-@import "slick-carousel/slick/slick-theme.css";
+@import 'slick-carousel/slick/slick.css';
+@import 'slick-carousel/slick/slick-theme.css';
 
 .donation {
   .slick-list {
@@ -20,14 +20,14 @@
   cursor: pointer;
   &.slick-prev {
     left: -52px;
-    background: url(../assets/images/btn_pagination_arrow_left.svg);
+    background: url(../images/btn_pagination_arrow_left.svg);
     &.slick-disabled {
       background: none;
     }
   }
   &.slick-next {
     right: -52px;
-    background: url(../assets/images/btn_pagination_arrow_right.svg);
+    background: url(../images/btn_pagination_arrow_right.svg);
     &.slick-disabled {
       background: none;
     }

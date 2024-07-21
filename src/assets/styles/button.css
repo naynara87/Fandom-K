@@ -44,7 +44,7 @@
 .btn-close {
   width: 24px;
   height: 24px;
-  background: url(../assets/images/btn_close.png) no-repeat center center;
+  background: url(../images/btn_close.png) no-repeat center center;
   background-size: cover;
   display: block;
 }
