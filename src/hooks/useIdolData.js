@@ -20,7 +20,6 @@ const useIdolData = (gender = null) => {
     } catch (error) {
       console.error("데이터 불러오기 중 오류 발생:", error);
       setFetchError(error);
-      throw error;
     } finally {
       setIsLoading(false);
     }

@@ -24,9 +24,11 @@ function DonationsList() {
     localCredit,
     setLocalReceivedDonations,
   );
+
   const updateProgressbar = () => {
     fetchData(true);
   };
+
   const sliderSettings = useMemo(
     () => ({
       slidesToShow: 4,
