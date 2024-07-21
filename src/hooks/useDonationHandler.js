@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, useMemo } from 'react';
 import putDonations from '../api/putApi';
 
 const useDonationHandler = (
@@ -21,7 +21,7 @@ const useDonationHandler = (
     setReceivedDonations(localReceivedDonations);
   }, [localCredit, localReceivedDonations]);
 
-  const validateDonation = ({ isValueExceedsCredit, isDonationExceedsGoal }) => {
+  const validateDonation = useCallback(({ isValueExceedsCredit, isDonationExceedsGoal }) => {
     if (!isValueExceedsCredit && !isDonationExceedsGoal) {
       setErrorMessage('');
       setIsDonationValid(true);
@@ -33,26 +33,29 @@ const useDonationHandler = (
       : '후원 금액이 목표 금액을 초과합니다';
     setErrorMessage(message);
     setIsDonationValid(false);
-  };
+  }, []);
 
-  const handleInputChange = (e) => {
-    const inputValue = e.target.value.trim();
-    setValue(inputValue);
+  const handleInputChange = useCallback(
+    (e) => {
+      const inputValue = e.target.value.trim();
+      setValue(inputValue);
 
-    if (inputValue === '') {
-      setErrorMessage('');
-      setIsDonationValid(false);
+      if (inputValue === '') {
+        setErrorMessage('');
+        setIsDonationValid(false);
 
-      return;
-    }
-    const numericValue = parseInt(inputValue, 10);
-    const isValueExceedsCredit = numericValue > myCredit;
-    const isDonationExceedsGoal = selectedDonation.receivedDonations + numericValue > selectedDonation.targetDonation;
+        return;
+      }
+      const numericValue = parseInt(inputValue, 10);
+      const isValueExceedsCredit = numericValue > myCredit;
+      const isDonationExceedsGoal = selectedDonation.receivedDonations + numericValue > selectedDonation.targetDonation;
 
-    validateDonation({ isValueExceedsCredit, isDonationExceedsGoal });
-  };
+      validateDonation({ isValueExceedsCredit, isDonationExceedsGoal });
+    },
+    [myCredit, selectedDonation.receivedDonations, selectedDonation.targetDonation, validateDonation],
+  );
 
-  const onClickDonations = async () => {
+  const onClickDonations = useCallback(async () => {
     if (selectedDonation) {
       try {
         const newCredit = myCredit - value;
@@ -61,24 +64,36 @@ const useDonationHandler = (
 
         const newReceivedDonations = receivedDonations + value;
         await putDonations(selectedDonation, value);
-        updateProgressbar();
         handleReceivedDonationsUpdate(newReceivedDonations);
         setReceivedDonations(newReceivedDonations);
+        updateProgressbar();
       } catch (error) {
         console.error('후원하기 중 오류 발생:', error);
       } finally {
         closeModal();
       }
     }
-  };
-
-  return {
+  }, [
+    myCredit,
     value,
-    errorMessage,
-    isDonationValid,
-    handleInputChange,
-    onClickDonations,
-  };
+    receivedDonations,
+    selectedDonation,
+    handleCreditUpdate,
+    updateProgressbar,
+    handleReceivedDonationsUpdate,
+    closeModal,
+  ]);
+
+  return useMemo(
+    () => ({
+      value,
+      errorMessage,
+      isDonationValid,
+      handleInputChange,
+      onClickDonations,
+    }),
+    [value, errorMessage, isDonationValid, handleInputChange, onClickDonations],
+  );
 };
 
 export default useDonationHandler;
