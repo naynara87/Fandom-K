@@ -5,7 +5,7 @@ import useChartVoteHandler from '../../../../hooks/useChartVoteHandler';
 import useEscapeModal from '../../../../hooks/useEscapeModal';
 
 import { CreditContext } from '../../../../context/CreditContextProvider';
-import IdolDetail from '../IdolDetail';
+import IdolDetail from '../IdolDetail/IdolDetail';
 
 function ChartVoteModal({ closeModal, idolRank, gender, updateIdolRank }) {
   const { handleCreditUpdate, localCredit } = useContext(CreditContext);

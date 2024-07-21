@@ -3,15 +3,15 @@ import Slider from 'react-slick';
 
 import './DonationList.css';
 
-import calculateTime from '../../../utils/calculateTime';
-import formatNumber from '../../../utils/formatNumber';
-import useDonationList from '../../../hooks/useDonationList';
-import useDonationFunc from '../../../hooks/useDonationFunc';
+import calculateTime from '../../../../utils/calculateTime';
+import formatNumber from '../../../../utils/formatNumber';
+import useDonationList from '../../../../hooks/useDonationList';
+import useDonationFunc from '../../../../hooks/useDonationFunc';
 
-import LoadingBar from '../../../components/Loadingbar';
-import { CreditContext } from '../../../context/CreditContextProvider';
-import DonationsModal from './DonationsModal/DonationsModal';
-import LackOfCreditModal from './LackOfCreditModal/LackOfCreditModal';
+import LoadingBar from '../../../../components/Loadingbar';
+import { CreditContext } from '../../../../context/CreditContextProvider';
+import DonationsModal from '../DonationsModal/DonationsModal';
+import LackOfCreditModal from '../LackOfCreditModal/LackOfCreditModal';
 
 function DonationsList() {
   const { selectedDonation, setSelectedDonation, localCredit, setLocalReceivedDonations } = useContext(CreditContext);

@@ -6,7 +6,7 @@ import { CreditContext } from '../../../../context/CreditContextProvider';
 import useIdolData from '../../../../hooks/useIdolData';
 import useChartFunc from '../../../../hooks/useChartFunc';
 
-import IdolDetail from '../IdolDetail';
+import IdolDetail from '../IdolDetail/IdolDetail';
 import ChartVoteModal from '../ChartVoteModal/ChartVoteModal';
 import LoadingBar from '../../../../components/Loadingbar';
 import LackOfCreditModal from '../LackOfCreditModal/LackOfCreditModal';
