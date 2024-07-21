@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import postVotes from '../api/postApi';
 
 const useChartVoteHandler = (gender, closeModal, idolRank, updateIdolRank, handleCreditUpdate, localCredit) => {
@@ -13,11 +13,11 @@ const useChartVoteHandler = (gender, closeModal, idolRank, updateIdolRank, handl
     }
   }, [idolRank, gender, localCredit]);
 
-  const handleIdolRadioClick = (idolId) => {
+  const handleIdolRadioClick = useCallback((idolId) => {
     setSelectedIdolId(idolId);
-  };
+  }, []);
 
-  const handleVoteButtonClick = async () => {
+  const handleVoteButtonClick = useCallback(async () => {
     if (selectedIdolId) {
       try {
         await postVotes(selectedIdolId);
@@ -31,9 +31,14 @@ const useChartVoteHandler = (gender, closeModal, idolRank, updateIdolRank, handl
         closeModal();
       }
     }
-  };
+  }, [selectedIdolId, myCredit, updateIdolRank, handleCreditUpdate, closeModal]);
 
-  return { selectedIdolId, handleIdolRadioClick, handleVoteButtonClick };
+  return {
+    selectedIdolId,
+    myCredit,
+    handleIdolRadioClick,
+    handleVoteButtonClick,
+  };
 };
 
 export default useChartVoteHandler;

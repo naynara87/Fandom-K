@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 
 const useDonationFunc = (selectedDonation, setSelectedDonation, localCredit, setLocalReceivedDonations) => {
   const [showDonationsModal, setShowDonationsModal] = useState(false);
@@ -6,32 +6,43 @@ const useDonationFunc = (selectedDonation, setSelectedDonation, localCredit, set
 
   const openLackOfCreditModal = () => setShowLackOfCreditModal(true);
 
-  const openDonationsModal = (donation) => {
-    setSelectedDonation(donation);
-    setShowDonationsModal(true);
-  };
+  const openDonationsModal = useCallback(
+    (donation) => {
+      setSelectedDonation(donation);
+      setShowDonationsModal(true);
+    },
+    [setSelectedDonation],
+  );
 
   useEffect(() => {
     if (!selectedDonation) return;
     setLocalReceivedDonations(selectedDonation.receivedDonations);
   }, [selectedDonation, setLocalReceivedDonations]);
 
-  const openModal = (donation) => {
-    if (localCredit <= 0) openLackOfCreditModal();
-    else openDonationsModal(donation);
-  };
+  const openModal = useCallback(
+    (donation) => {
+      if (localCredit <= 0) openLackOfCreditModal();
+      else openDonationsModal(donation);
+    },
+    [localCredit, openLackOfCreditModal, openDonationsModal],
+  );
 
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     if (showDonationsModal) setShowDonationsModal(false);
     setShowLackOfCreditModal(false);
-  };
+  }, [showDonationsModal]);
 
-  return {
-    showDonationsModal,
-    showLackOfCreditModal,
-    openModal,
-    closeModal,
-  };
+  const memoizedValues = useMemo(
+    () => ({
+      showDonationsModal,
+      showLackOfCreditModal,
+      openModal,
+      closeModal,
+    }),
+    [showDonationsModal, showLackOfCreditModal, openModal, closeModal],
+  );
+
+  return memoizedValues;
 };
 
 export default useDonationFunc;
