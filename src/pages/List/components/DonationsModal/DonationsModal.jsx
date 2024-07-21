@@ -1,14 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext } from 'react';
 
-import donationCredit from "../../../../assets/images/ico_credit_non_gradation.png";
+import donationCredit from '../../../../assets/images/ico_credit_non_gradation.png';
 
-import "./DonationsModal.css";
-import useEscapeModal from "../../../../hooks/useEscapeModal";
-import useDonationHandler from "../../../../hooks/useDonationHandler";
-import handleBackgroundClick from "../../../../utils/handleBackgroundClick";
+import './DonationsModal.css';
+import useEscapeModal from '../../../../hooks/useEscapeModal';
+import useDonationHandler from '../../../../hooks/useDonationHandler';
+import handleBackgroundClick from '../../../../utils/handleBackgroundClick';
 
-import { CreditContext } from "../../../../context/CreditContextProvider";
-import CloseButton from "./CloseButton";
+import { CreditContext } from '../../../../context/CreditContextProvider';
+import CloseButton from './CloseButton';
 
 function DonationsModal({ profilePicture, subtitle, title, closeModal, isOpen, updateProgressbar }) {
   const { handleCreditUpdate, handleReceivedDonationsUpdate, localReceivedDonations, localCredit, selectedDonation } =
@@ -48,7 +48,7 @@ function DonationsModal({ profilePicture, subtitle, title, closeModal, isOpen, u
               value={value}
               placeholder="크레딧 입력"
               onChange={handleInputChange}
-              style={{ borderColor: errorMessage ? "red" : "" }}
+              style={{ borderColor: errorMessage ? 'red' : '' }}
             />
             <img src={donationCredit} alt="크레딧 이미지" />
           </div>

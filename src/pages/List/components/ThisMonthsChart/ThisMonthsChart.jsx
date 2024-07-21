@@ -1,15 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext } from 'react';
 
-import "./ThisMonthsChart.css";
+import './ThisMonthsChart.css';
 
-import { CreditContext } from "../../../../context/CreditContextProvider";
-import useIdolData from "../../../../hooks/useIdolData";
-import useChartFunc from "../../../../hooks/useChartFunc";
+import { CreditContext } from '../../../../context/CreditContextProvider';
+import useIdolData from '../../../../hooks/useIdolData';
+import useChartFunc from '../../../../hooks/useChartFunc';
 
-import IdolDetail from "../IdolDetail";
-import ChartVoteModal from "../ChartVoteModal/ChartVoteModal";
-import LoadingBar from "../../../../components/Loadingbar";
-import LackOfCreditModal from "../LackOfCreditModal/LackOfCreditModal";
+import IdolDetail from '../IdolDetail';
+import ChartVoteModal from '../ChartVoteModal/ChartVoteModal';
+import LoadingBar from '../../../../components/Loadingbar';
+import LackOfCreditModal from '../LackOfCreditModal/LackOfCreditModal';
 
 function ThisMonthsChart() {
   const { localCredit } = useContext(CreditContext);
@@ -33,15 +33,15 @@ function ThisMonthsChart() {
       <div className="chart-tab">
         <button
           type="button"
-          className={`chart-tab-button ${activeTab === "female" ? "active" : ""}`}
-          onClick={() => tab("female")}
+          className={`chart-tab-button ${activeTab === 'female' ? 'active' : ''}`}
+          onClick={() => tab('female')}
         >
           이달의 여자 아이돌
         </button>
         <button
           type="button"
-          className={`chart-tab-button ${activeTab === "male" ? "active" : ""}`}
-          onClick={() => tab("male")}
+          className={`chart-tab-button ${activeTab === 'male' ? 'active' : ''}`}
+          onClick={() => tab('male')}
         >
           이달의 남자 아이돌
         </button>

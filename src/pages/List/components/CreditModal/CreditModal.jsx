@@ -1,7 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext } from 'react';
 
-import "./CreditModal.css";
-import { CreditContext } from "../../../../context/CreditContextProvider";
+import './CreditModal.css';
+import { CreditContext } from '../../../../context/CreditContextProvider';
 
 function CreditModal({ onClose }) {
   const { handleRecharge } = useContext(CreditContext);
@@ -22,7 +22,7 @@ function CreditModal({ onClose }) {
           {creditOptions.map((credit) => (
             <label
               key={credit}
-              className={`radio-label ${selectedCredit === credit ? "selected" : ""}`} // 선택된 라디오 버튼에 클래스 추가
+              className={`radio-label ${selectedCredit === credit ? 'selected' : ''}`} // 선택된 라디오 버튼에 클래스 추가
               htmlFor={`credit-${credit}`}
             >
               <div className="radio-credit-wrapper">

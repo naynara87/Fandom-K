@@ -1,10 +1,10 @@
-import React from "react";
-import "./LackOfCreditModal.css";
+import React from 'react';
+import './LackOfCreditModal.css';
 
-import handleBackgroundClick from "../../../../utils/handleBackgroundClick";
+import handleBackgroundClick from '../../../../utils/handleBackgroundClick';
 
-import CloseButton from "../DonationsModal/CloseButton";
-import useEscapeModal from "../../../../hooks/useEscapeModal";
+import CloseButton from '../DonationsModal/CloseButton';
+import useEscapeModal from '../../../../hooks/useEscapeModal';
 
 function LackOfCreditModal({ closeModal }) {
   useEscapeModal(closeModal);

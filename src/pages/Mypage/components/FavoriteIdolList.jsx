@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import "./FavoriteIdolList.css";
-import useSaveMyIdol from "../../../hooks/useSaveMyIdol";
+import './FavoriteIdolList.css';
+import useSaveMyIdol from '../../../hooks/useSaveMyIdol';
 
-import MyFavoriteIdolList from "./MyFavoriteIdolList/MyFavoriteIdolList";
-import AddFavoriteIdolList from "./AddFavoriteIdolList/AddFavoriteIdolList";
+import MyFavoriteIdolList from './MyFavoriteIdolList/MyFavoriteIdolList';
+import AddFavoriteIdolList from './AddFavoriteIdolList/AddFavoriteIdolList';
 
 function FavoriteIdolList() {
   const { myFavoriteIdolList, setMyFavoriteIdolList } = useSaveMyIdol();

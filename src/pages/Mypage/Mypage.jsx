@@ -1,7 +1,7 @@
-import React from "react";
-import "./Mypage.css";
-import FavoriteIdolList from "./components/FavoriteIdolList";
-import Header from "../../components/Header";
+import React from 'react';
+import './Mypage.css';
+import FavoriteIdolList from './components/FavoriteIdolList';
+import Header from '../../components/Header';
 
 function MyPage() {
   return (
