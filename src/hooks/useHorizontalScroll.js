@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect } from 'react';
 
 const useHorizontalScroll = () => {
   const listWrapperRef = useRef(null);
@@ -12,10 +12,10 @@ const useHorizontalScroll = () => {
       e.preventDefault();
     };
 
-    container.addEventListener("wheel", handleWheel);
+    container.addEventListener('wheel', handleWheel);
 
     return () => {
-      container.removeEventListener("wheel", handleWheel);
+      container.removeEventListener('wheel', handleWheel);
     };
   }, []);
 

@@ -5,8 +5,8 @@ export default function calculateTime(deadline) {
   const daysRemaining = Math.ceil(difference / (1000 * 3600 * 24));
 
   if (daysRemaining === 0) {
-    return "오늘 마감";
+    return '오늘 마감';
   }
 
-  return daysRemaining === 1 ? "1일 남음" : `${daysRemaining}일 남음`;
+  return daysRemaining === 1 ? '1일 남음' : `${daysRemaining}일 남음`;
 }

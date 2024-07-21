@@ -1,20 +1,20 @@
-import React from "react";
-import { Helmet } from "react-helmet";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom';
 
-import logo from "../../assets/images/logo_pandom_k.svg";
-import mobile1 from "../../assets/images/img_sec01_mobile.png";
-import mobile2 from "../../assets/images/img_sec02_mobile.png";
-import mobile3 from "../../assets/images/img_sec03_mobile.png";
-import "./Landing.css";
-import useScrollAnimation from "../../hooks/useScrollAnimation";
+import logo from '../../assets/images/logo_pandom_k.svg';
+import mobile1 from '../../assets/images/img_sec01_mobile.png';
+import mobile2 from '../../assets/images/img_sec02_mobile.png';
+import mobile3 from '../../assets/images/img_sec03_mobile.png';
+import './Landing.css';
+import useScrollAnimation from '../../hooks/useScrollAnimation';
 
 function Landing() {
-  useScrollAnimation("animate", 0.5);
+  useScrollAnimation('animate', 0.5);
 
   const clearLocalStorage = () => {
     localStorage.clear();
-    console.log("localStorage가 초기화되었습니다.");
+    console.log('localStorage가 초기화되었습니다.');
   };
 
   return (

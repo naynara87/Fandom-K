@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
 const useScrollAnimation = (className, threshold = 0.5) => {
   useEffect(() => {
@@ -6,7 +6,7 @@ const useScrollAnimation = (className, threshold = 0.5) => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("show");
+            entry.target.classList.add('show');
           }
         });
       },

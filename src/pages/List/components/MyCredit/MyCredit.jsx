@@ -1,14 +1,14 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext } from 'react';
 
-import "./MyCredit.css";
-import { CreditContext } from "../../../../context/CreditContextProvider";
-import CreditModal from "../CreditModal/CreditModal";
+import './MyCredit.css';
+import { CreditContext } from '../../../../context/CreditContextProvider';
+import CreditModal from '../CreditModal/CreditModal';
 
 function MyCredit() {
   const { localCredit, isModalOpen, setIsModalOpen } = useContext(CreditContext);
 
   useEffect(() => {
-    localStorage.setItem("myCredit", JSON.stringify(localCredit));
+    localStorage.setItem('myCredit', JSON.stringify(localCredit));
   }, [localCredit]);
 
   return (

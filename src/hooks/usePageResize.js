@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import getPageSize from "../utils/getPageSize";
+import { useEffect, useState } from 'react';
+import getPageSize from '../utils/getPageSize';
 
 const usePageResize = () => {
   const [pageSize, setPageSize] = useState(getPageSize());
@@ -12,9 +12,9 @@ const usePageResize = () => {
       setDisplayCount(newPageSize);
     };
 
-    window.addEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
     return () => {
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 

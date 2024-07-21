@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 const useManageIdols = (idolData, myFavoriteIdolList, setMyFavoriteIdolList) => {
   const [isSelected, setIsSelected] = useState({});
