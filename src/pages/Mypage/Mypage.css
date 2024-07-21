@@ -1,18 +1,14 @@
 .favorite-idol-list {
   width: 1200px;
   margin: 0 auto;
-}
 
-@media (max-width: 1199px) {
-  .favorite-idol-list {
+  @media (max-width: 1199px) {
     width: 744px;
     padding-right: 24px;
     padding-left: 24px;
   }
-}
 
-@media (max-width: 767px) {
-  .favorite-idol-list {
+  @media (max-width: 767px) {
     width: 376px;
   }
 }

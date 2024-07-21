@@ -1,6 +1,5 @@
 .modal-donation {
   .modal-content {
-    gap: 24px;
     .idol-info {
       display: flex;
       flex-direction: column;
@@ -29,33 +28,31 @@
   }
 }
 /* input */
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
 .input-wrapper {
   position: relative;
   display: flex;
   align-items: center;
-}
-
-.input-wrapper input {
-  width: 295px;
-  height: 58px;
-  padding: 16px;
-  border-radius: 8px;
-  border: 1px solid var(--white);
-  background-color: #272f3d;
-  color: var(--white);
-}
-
-.input-wrapper img {
-  width: 24px;
-  height: 24px;
-  position: absolute;
-  right: 16px;
+  margin-top: 10px;
+  input {
+    width: 295px;
+    height: 58px;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 16px 40px 16px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--white);
+    background-color: #272f3d;
+    background-image: url('../../../../assets/images/ico_credit_non_gradation.png');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 25px;
+    color: var(--white);
+    &[type='number']::-webkit-outer-spin-button,
+    &[type='number']::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
 }
 
 .donation-input-error {
@@ -64,5 +61,4 @@ input[type="number"]::-webkit-inner-spin-button {
   line-height: 14px;
   text-align: left;
   color: var(--error);
-  margin-top: 6px;
 }
