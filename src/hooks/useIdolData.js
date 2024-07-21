@@ -9,14 +9,9 @@ const useIdolData = (gender = null) => {
   const fetchIdolsData = async () => {
     setIsLoading(true);
     try {
-      let response;
-
-      if (gender) response = await getCharts(gender);
-      else response = await getIdols();
-
+      const response = gender ? await getCharts(gender) : await getIdols();
       setIdolData(response);
       setFetchError(null);
-      setIsLoading(false);
     } catch (error) {
       console.error('데이터 불러오기 중 오류 발생:', error);
       setFetchError(error);

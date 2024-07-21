@@ -1,19 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 const useShowArrow = () => {
-  const [showArrow, setShowArrow] = useState(true);
+  const [showArrow, setShowArrow] = useState(() => window.innerWidth > 767);
+
+  const handleWindowResize = useCallback(() => {
+    setShowArrow(window.innerWidth > 767);
+  }, []);
 
   useEffect(() => {
-    const handleWindowResize = () => {
-      setShowArrow(window.innerWidth > 767);
-    };
-
     window.addEventListener('resize', handleWindowResize);
 
     return () => {
       window.removeEventListener('resize', handleWindowResize);
     };
-  }, []);
+  }, [handleWindowResize]);
 
   return showArrow;
 };
