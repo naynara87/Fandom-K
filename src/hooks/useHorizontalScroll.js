@@ -1,23 +1,27 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useCallback } from 'react';
 
 const useHorizontalScroll = () => {
   const listWrapperRef = useRef(null);
 
-  useEffect(() => {
+  const handleWheel = useCallback((e) => {
     const container = listWrapperRef.current;
-
-    const handleWheel = (e) => {
+    if (container) {
       const delta = e.deltaY || e.detail || e.wheelDelta;
       container.scrollLeft += delta;
       e.preventDefault();
-    };
-
-    container.addEventListener('wheel', handleWheel);
-
-    return () => {
-      container.removeEventListener('wheel', handleWheel);
-    };
+    }
   }, []);
+
+  useEffect(() => {
+    const container = listWrapperRef.current;
+    if (container) {
+      container.addEventListener('wheel', handleWheel);
+      return () => {
+        container.removeEventListener('wheel', handleWheel);
+      };
+    }
+    return () => {};
+  }, [handleWheel]);
 
   return listWrapperRef;
 };
