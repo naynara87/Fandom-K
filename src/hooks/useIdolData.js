@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getIdols, getCharts } from '../api/getApi';
 
 const useIdolData = (gender = null) => {
@@ -6,7 +6,7 @@ const useIdolData = (gender = null) => {
   const [isLoading, setIsLoading] = useState(true);
   const [fetchError, setFetchError] = useState(null);
 
-  const fetchIdolsData = async () => {
+  const fetchIdolsData = useCallback(async () => {
     setIsLoading(true);
     try {
       const response = gender ? await getCharts(gender) : await getIdols();
@@ -18,11 +18,11 @@ const useIdolData = (gender = null) => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [gender]);
 
   useEffect(() => {
     fetchIdolsData();
-  }, [gender]);
+  }, [fetchIdolsData]);
 
   return { idolData, isLoading, fetchError, fetchIdolsData };
 };
