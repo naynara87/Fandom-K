@@ -1,5 +1,4 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 
 import logo from '../../assets/images/logo_pandom_k.svg';
@@ -7,7 +6,9 @@ import mobile1 from '../../assets/images/img_sec01_mobile.png';
 import mobile2 from '../../assets/images/img_sec02_mobile.png';
 import mobile3 from '../../assets/images/img_sec03_mobile.png';
 import './Landing.css';
+
 import useScrollAnimation from '../../hooks/useScrollAnimation';
+import MetaTag from '../../components/MetaTag';
 
 function Landing() {
   useScrollAnimation('animate', 0.5);
@@ -19,9 +20,7 @@ function Landing() {
 
   return (
     <>
-      <Helmet>
-        <title>Fandom-k :: 내가 좋아하는 아이돌을 가장 쉽게 덕질 하는 방법</title>
-      </Helmet>
+      <MetaTag />
       <main>
         <section className="main-section sec01">
           <div className="section-wrap">
