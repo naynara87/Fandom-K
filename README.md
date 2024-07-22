@@ -19,7 +19,13 @@ Fandom-k/
 ├── public/
 │   ├── index.html
 │   └── ...
+├── ReadmeSource/
+│   └── ...
 ├── src/
+│   ├── api/
+│   │   ├── getApi
+│   │   ├── postApi
+│   │   └── putApi
 │   ├── assets/
 │   │   ├── fonts/
 │   │   ├── images/
@@ -27,16 +33,38 @@ Fandom-k/
 │   │       └── global.css
 │   ├── components/
 │   │   ├── Header
-│   │   ├── Modal
+│   │   ├── Loadingbar
+│   │   └── ...
+│   ├── context/
+│   │   └── CreditContextProvider
+│   ├── hooks/
+│   │   ├── useChartFunc
 │   │   └── ...
 │   ├── pages/
-│   │   ├── MyPage
-│   │   ├── List
-│   │   └── Main
-│   ├── hooks
-│   │   ├── useSync
-│   │   └── ...
-│   ├── utills
+│   │   ├── Landing/
+│   │   │   ├── Landing.jsx
+│   │   │   └── ...
+│   │   ├── List/
+│   │   │   ├── components/
+│   │   │   │   ├── ChartVoteModal/
+│   │   │   │   │   ├── ChartVoteModal.jsx
+│   │   │   │   │   └── ...
+│   │   │   │   ├── CreditModal
+│   │   │   │   │   ├── CreditModal.jsx
+│   │   │   │   │   └── ...
+│   │   │   │   └── ...
+│   │   │   └── List.jsx
+│   │   └── Mypage/
+│   │       ├── components/
+│   │       │   ├── AddFavoriteIdolList/
+│   │       │   │   ├── AddIdolListButton/
+│   │       │   │   └── ...
+│   │       │   └── MyFavoriteIdolList/
+│   │       │   │   ├── MyIdolListItem/
+│   │       │   │   └── ...
+│   │       │   └── ...
+│   │       └── ...
+│   ├── utils/
 │   │   └── ...
 │   ├── App.js
 │   └── index.js

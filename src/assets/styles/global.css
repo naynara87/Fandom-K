@@ -1,5 +1,7 @@
 @import './fonts.css';
 @import './variables.css';
-@import './tailwind.css';
 @import './reset.css';
-
+@import './typography.css';
+@import './button.css';
+@import './icon.css';
+@import './slide.css';
