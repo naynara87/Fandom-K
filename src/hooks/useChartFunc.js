@@ -16,7 +16,7 @@ const useChartFunc = (localCredit) => {
       setDisplayCount(pageSize);
       fetchIdolsData(gender, pageSize);
     },
-    [fetchIdolsData, pageSize],
+    [setDisplayCount, fetchIdolsData, pageSize],
   );
 
   const openModal = useCallback(() => {
@@ -24,7 +24,7 @@ const useChartFunc = (localCredit) => {
       setShowLackOfCreditModal(true);
     } else {
       setIsModalOpen(true);
-      fetchIdolsData(activeTab, displayCount); // Ensure data is fetched when modal opens
+      fetchIdolsData(activeTab, displayCount);
     }
   }, [localCredit, fetchIdolsData, activeTab, displayCount]);
 
@@ -36,10 +36,10 @@ const useChartFunc = (localCredit) => {
   const loadMore = useCallback(() => {
     setDisplayCount((prevCount) => {
       const newCount = prevCount + pageSize;
-      fetchIdolsData(activeTab, newCount); // Fetch more data when loading more
+      fetchIdolsData(activeTab, newCount);
       return newCount;
     });
-  }, [fetchIdolsData, pageSize, activeTab]);
+  }, [setDisplayCount, fetchIdolsData, pageSize, activeTab]);
 
   return {
     isModalOpen,

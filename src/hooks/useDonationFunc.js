@@ -4,7 +4,9 @@ const useDonationFunc = (selectedDonation, setSelectedDonation, localCredit, set
   const [showDonationsModal, setShowDonationsModal] = useState(false);
   const [showLackOfCreditModal, setShowLackOfCreditModal] = useState(false);
 
-  const openLackOfCreditModal = () => setShowLackOfCreditModal(true);
+  const openLackOfCreditModal = useCallback(() => {
+    setShowLackOfCreditModal(true);
+  }, []);
 
   const openDonationsModal = useCallback(
     (donation) => {
