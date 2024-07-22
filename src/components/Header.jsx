@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import logo from '../assets/images/logo_pandom_k.svg';
+import logo from '../assets/images/logo_fandom_k.svg';
 import profile from '../assets/images/img_header_profile.png';
 import './Header.css';
 
