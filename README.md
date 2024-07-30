@@ -4,11 +4,6 @@
 <b>내가 좋아하는 아이돌을 가장 쉽게 덕질하는 서비스</b>
 </p>
 
-### 요구사항
-- [디자인](https://www.figma.com/design/3RlulJLcw8NDqNNFNcaBOL/%ED%8C%80%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8?node-id=1-9487&t=e3GiGHll8MxZXEKL-1) 시안 확인하기
-- [기획](https://codeit.notion.site/Fandom-K-32de75dea0204259817fd345535b5d89) 확인하기
-<br>
-
 ### 개요
 - 개발 기간: 24.07.10 ~ 24.07.24(2주)
 - 팀원(4명)
