@@ -18,4 +18,4 @@
 - 디자인 시안 및 기획: (주)코드잇
 <br>
 
-### 자세한 내용은 [위키 페이지](https://github.com/ojm51/Fandom-K.wiki.git)를 확인해주세요!
+### 자세한 내용은 [위키 페이지](https://github.com/ojm51/Fandom-K/wiki)를 확인해주세요!
